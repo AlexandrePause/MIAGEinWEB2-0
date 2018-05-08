@@ -1,1 +1,1 @@
-node API\main.js
+node-dev API\main.js

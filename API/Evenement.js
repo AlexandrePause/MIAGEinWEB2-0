@@ -13,6 +13,16 @@ function Evenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTyp
 	this.idTypePart = idTypePart;
 }
 
+var dernierId = function(){
+	var ancId = 0;
+	for(var id in listeEvt){
+		if(id > ancId){
+			ancId = id;
+		}
+	}
+	return ancId
+}
+
 var creerEvt = function(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart){
 	// s'il n'existe pas
 	if (typeof listeEvt[id] === 'undefined') {
@@ -69,3 +79,4 @@ exports.creerEvt = creerEvt;
 exports.recupEvenement = recupEvenement;
 exports.supprEvenement = supprEvenement;
 exports.modifEvenement = modifEvenement;
+exports.dernierId = dernierId;

@@ -43,7 +43,26 @@ var modifTypePart = function(id, denom, maxAcc){
 	}
 }
 
+var typeExist = function(id){
+	if (typeof listeTypePart[id] !== 'undefined') 
+		return 1;
+	else
+		return 0;
+}
+
+var dernierId = function(){
+	var ancId = 0;
+	for(var id in listeTypePart){
+		if(id > ancId){
+			ancId = id;
+		}
+	}
+	return ancId
+}
+
 exports.creerTypePart = creerTypePart;
 exports.recupTypePart = recupTypePart;
 exports.supprTypePart = supprTypePart;
 exports.modifTypePart = modifTypePart;
+exports.typeExist = typeExist;
+exports.dernierId = dernierId;

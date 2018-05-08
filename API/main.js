@@ -13,6 +13,19 @@ app.listen(3000, function () {
 	console.log('Fonctionne') ;
 });
 
+//permettre le cross-domain
+app.options('/*', function(req, res){
+	res.header('Access-Control-Allow-Origin', '*');
+  	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+ 	res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+	res.sendStatus(200);
+});
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
+
 //Creer un evenement
 app.post('/evenement', function(req, res){
 	
@@ -25,7 +38,7 @@ app.post('/evenement', function(req, res){
 	var lieu = req.body.lieu;
 	var nbPartMax = req.body.nbPartMax;
 	var typePart = req.body.typePart;
-	
+
 	if(!isNaN(id)){
 		if(evenement.creerEvt(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart))
 			res.status(201).send("Votre evenement a été ajouté.");
@@ -146,4 +159,27 @@ app.delete('/typePart/id=:id', function(req,res){
 	}
 	else
 		res.status(400).send("L'id passé en parametre n'est pas conforme.");
+});
+
+//Recupere le dernier id ajouté pour les evenements
+app.get('/lastIdEvent', function(req, res){
+	
+	res.send({"id" : evenement.dernierId()});
+	
+});
+
+//Recupere le dernier id ajouté pour les Type de participant
+app.get('/lastIdTypePart', function(req, res){
+	
+	res.send({"id" : typeParticipant.dernierId()});
+	
+});
+
+//Retourne vrai si le type existe
+app.get('/typeExist/id=:id', function(req, res){
+	var id = parseInt(req.params.id, 10);
+	if(typeParticipant.typeExist(id) === 1)
+		res.send({"existe" : true});
+	else
+		res.send({"existe" : false});
 });
