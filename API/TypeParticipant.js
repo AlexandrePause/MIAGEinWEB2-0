@@ -1,4 +1,15 @@
 var listeTypePart = {};
+listeTypePart[1] = {
+	"id" : 1,
+	"denom" : "Etudiant",
+	"nbMax" : 2		
+}
+
+listeTypePart[10] = {
+	"id" : 10,
+	"denom" : "Professeur",
+	"nbMax" : 3		
+}
 
 function TypeParticipant(id, denom, maxAcc){
 	this.id = id;
@@ -60,9 +71,14 @@ var dernierId = function(){
 	return ancId
 }
 
+var getAllType = function(){
+	return listeTypePart;
+}
+
 exports.creerTypePart = creerTypePart;
 exports.recupTypePart = recupTypePart;
 exports.supprTypePart = supprTypePart;
 exports.modifTypePart = modifTypePart;
 exports.typeExist = typeExist;
 exports.dernierId = dernierId;
+exports.getAllType = getAllType;

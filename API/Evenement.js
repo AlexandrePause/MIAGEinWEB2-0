@@ -1,6 +1,30 @@
 var typeParticipant = require('./TypeParticipant');
 var listeEvt = {};
 
+listeEvt[1] = {
+	"id" : 1,
+	"acro" : "EVT1",
+	"nom" : "Evenement 1",
+	"desc" : "Premier evenemnt",
+	"datOuvr" : "10/10/2017",
+	"datFerm" : "10/11/2017",
+	"lieu" : "Lycée st Pierre",
+	"nbPartMax" : "30",
+	"typePart" : "1"
+};
+
+listeEvt[10] = {
+	"id" : 10,
+	"acro" : "EVT2",
+	"nom" : "Evenement 2",
+	"desc" : "Second evenemnt",
+	"datOuvr" : "02/05/2018",
+	"datFerm" : "10/07/2018",
+	"lieu" : "Salle Robert Piteu",
+	"nbPartMax" : "50",
+	"typePart" : "10"
+};
+
 function Evenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTypePart){
 	this.id = id;
 	this.acro = acro;
@@ -46,7 +70,7 @@ var recupEvenement = function(id) {
 var supprEvenement = function(id){
 	if (typeof listeEvt[id] === 'undefined') 
 		return 0;
-	listeEvt.splice(id, 1);
+	delete listeEvt[id];
 	return 1;
 }
 
@@ -75,8 +99,13 @@ var modifEvenement = function(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPar
 	}
 }
 
+var getAllEvenement = function(){
+	return listeEvt;
+}
+
 exports.creerEvt = creerEvt;
 exports.recupEvenement = recupEvenement;
 exports.supprEvenement = supprEvenement;
 exports.modifEvenement = modifEvenement;
 exports.dernierId = dernierId;
+exports.getAllEvenement = getAllEvenement;

@@ -11,6 +11,9 @@ app.config(function($routeProvider) {
 	.when("/modifEvent", {
 		templateUrl : "AjouterModifierEvent.html"
 	})
+	.when("/modifEvent/:id", {
+		templateUrl : "AjouterModifierEvent.html"
+	})
 	.when("/creerTypePart", {
 		templateUrl : "CreerTypeParticipant.html"
 	})

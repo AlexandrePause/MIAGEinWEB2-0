@@ -1,9 +1,9 @@
 <div class="container">
 	<h1 class="row justify-content-md-center">Liste des évènements</h1>
 	</div>
-
-	<div class="container">
-  	<table class="table table-bordered">
+<div ng-controller="listeEventCtrl">
+	<div class="container" ng-controller="listeEventCtrl">
+  	<table class="table table-bordered" id="listeEvent">
   		<thead>
   			<tr>
   				<th>Acronyme</th>
@@ -15,37 +15,15 @@
   			</tr>
   		</thead>
   		<tbody>
-  			<tr>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>test</td>
+  			<tr ng-repeat="x in listeEvent" id="{{x.id}}">
+  				<td>{{ x.acro }}</td>
+  				<td>{{ x.nom }}</td>
+  				<td>{{ x.lieu }}</td>
+  				<td>{{ x.datOuvr }}</td>
+  				<td>{{ x.datFerm }}</td>
   				<td>
-  					<button class="btn">Modifier</button>
-  					<button class="btn">Supprimer</button>
-  				</td>
-  			</tr>
-  			<tr>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>
-  					<button class="btn">Modifier</button>
-  					<button class="btn">Supprimer</button>
-  				</td>
-  			</tr>
-  			<tr>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>test</td>
-  				<td>
-  					<button class="btn">Modifier</button>
-  					<button class="btn">Supprimer</button>
+  					<button class="btn" ng-click="modifier(x.id)" >Modifier</button>
+  					<button class="btn" ng-click="supprimer(x.id)">Supprimer</button>
   				</td>
   			</tr>
   		</tbody>
@@ -56,8 +34,9 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-sm-3">
-					<button class="btn btn-block" onclick="window.location.href='#!modifEvent'">Ajouter un Evènement</button>
+					<button class="btn btn-block" ng-click="modifier()">Ajouter un Evènement</button>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>

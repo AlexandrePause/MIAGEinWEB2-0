@@ -183,3 +183,11 @@ app.get('/typeExist/id=:id', function(req, res){
 	else
 		res.send({"existe" : false});
 });
+
+app.get('/allType', function(req, res){
+	res.send(typeParticipant.getAllType());
+});
+
+app.get('/allEvenement', function(req, res){
+	res.send(evenement.getAllEvenement());
+});
