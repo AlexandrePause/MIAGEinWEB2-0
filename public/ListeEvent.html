@@ -13,7 +13,9 @@
   			<tr>
   				<th>Acronyme</th>
   				<th>Nom</th>
-  				<th>Lieu</th>
+          <th>Lieu</th>
+          <th>Nombre max.</th>
+          <th>Nombre d'inscrits</th>
   				<th>Ouverture inscription</th>
   				<th>Fermeture inscription</th>
   				<th>Actions</th>
@@ -24,11 +26,14 @@
   				<td>{{ x.acro }}</td>
   				<td>{{ x.nom }}</td>
   				<td>{{ x.lieu }}</td>
+          <td>{{ x.nbPartMax }}</td>
+          <td></td>
   				<td>{{ x.datOuvr }}</td>
   				<td>{{ x.datFerm }}</td>
   				<td>
   					<button class="btn" ng-click="modifier(x.id)" >Modifier</button>
   					<button class="btn" ng-click="supprimer(x.id)">Supprimer</button>
+            <button type="button" class="btn btn-block"  onclick="window.location.href='#!inscriptionEvent'">S'inscrire</button>
   				</td>
   			</tr>
   		</tbody>

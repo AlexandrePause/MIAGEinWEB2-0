@@ -1,14 +1,14 @@
   <div class="container">
     <div class="col-sm-3">
-      <button type="button" class="btn btn-block" onclick="window.location.href='#!'">ACCUEIL</button>
+      <button type="button" class="btn btn-block" onclick="window.location.href='#!ListeEvent'">RETOUR</button>
     </div>
   </div>
   <div class="container">
-    <h1 class="row justify-content-md-center">Créer un compte</h1>
+    <h1 class="row justify-content-md-center">S'inscrire</h1>
   </div>
 
 
-  <form>
+  <form ng-controller="ajouterInscriptionCtrl">
       <div class="form-group">
        <div class="container">
         <div class="row justify-content-md-center">
@@ -41,29 +41,42 @@
 
     <div class="form-group">
      <div class="container">
-      <div class="row justify-content-md-center">
-       <div class="col-sm-7">
-          <input class="form-control" placeholder="tél" type="text">
+        <div class="row justify-content-md-center">
+         <div class="col-sm-7">
+            <input class="form-control" placeholder="tél" type="text">
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="form-group">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-sm-2">
+            Type d'inscription 
+          </div>
+          <div class="col-sm-3">
+            <select class="form-control" ng-model="typePart" ng-options="x.denom for x in listeType">      
+            </select>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn" onclick="window.location.href='#!creerTypePart'">Créer un type</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="form-group">
      <div class="container">
-      <div class="row justify-content-md-center">
-       <div class="col-sm-2">
-        Type d'inscription :
+        <div class="row justify-content-md-center">
+          <div class="col-sm-3">
+            <input class="form-control" type="text" placeholder="accompagnant" disabled="disabled">
+          </div>
+          <div class="col-sm-3">
+            <button class="btn">Ajouter un accompagnant</button>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-3">
-        <select class="form-control" ng-model="typePart" ng-options="x.denom for x in listeType">      
-        </select>
-      </div>
-      <div class="col-sm-2">
-        <button class="btn" onclick="window.location.href='#!creerTypePart'">Créer un type</button>
-      </div>
-    </div>
-    </div>
     </div>
 
     <div class="form-group">

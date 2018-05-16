@@ -17,8 +17,8 @@ app.config(function($routeProvider) {
 	.when("/creerTypePart", {
 		templateUrl : "CreerTypeParticipant.html"
 	})
-	.when("/creerCompte", {
-		templateUrl : "CreerCompte.html"
+	.when("/inscriptionEvent", {
+		templateUrl : "InscriptionEvent.html"
 	})
 	.otherwise({
 	    template : "<h1>None</h1><p>Nothing has been selected</p>"
