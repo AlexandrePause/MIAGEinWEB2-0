@@ -4,12 +4,41 @@ module.exports = function (app) {
 	app.get('/user/id=:id', function(req, res){
 		
 		//Recupere un user
-		var id = parseInt(req.params.id, 10);
-		if(!isNaN(id))
-			res.json(users.recupUser(req.params.id));
-		else
-			res.status(400).send("L'id passé en parametre n'est pas conforme.");
+		res.json(users.recupUser(req.params.id));
+	});
+
+	//Creation d'un utilisateur normal
+	app.post('/addUser', function(req, res){
 		
+		var mail = req.body.mail;
+		var nom = req.body.nom;
+		var prenom = req.body.prenom;
+		var tel = req.body.tel;
+		var idTypePart = req.body.idTypePart;
+
+		if(users.creerUser(mail, nom, prenom, tel, idTypePart, -1)){
+			res.status(200).send("Compte créé");;
+		}
+		else
+			res.status(400).send("Le compte existe deja");
+		
+		
+	});
+
+	//Création d'un accompagnant
+	app.post('/addAccomp', function(req, res){
+		var mail = req.body.mail;
+		var nom = req.body.nom;
+		var prenom = req.body.prenom;
+		var tel = req.body.tel;
+		var idTypePart = req.body.idTypePart;
+		var idAccompagnant = req.body.idAccompagnant;
+
+		if(users.creerUser(mail, nom, prenom, idTypePart, idAccompagnant)){
+			res.status(200).send("Compte accompagnant créé");;
+		}
+		else
+			res.status(400).send("Le compte existe deja");
 	});
 };
 

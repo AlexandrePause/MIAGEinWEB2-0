@@ -1,31 +1,29 @@
 var listeUser = {};
 
-listeUser[1] = new User(1,"Colonge","Yanek", "yanekcolonge@hotmail.fr", "0", 1, -1);
-
-function User(id, nom, prenom, mail, tel, idTypePart, idAccompagnant){
-	this.id = id;
-	this.prenom = prenom;
+function User(mail, nom, prenom, tel, idTypePart, idAccompagnant){
 	this.mail = mail;
+	this.nom = nom;
+	this.prenom = prenom;
 	this.tel = tel;
 	this.idTypePart = idTypePart;
 	this.idAccompagnant = idAccompagnant;
 }
 
-var creerUser = function(id, nom, prenom, mail, tel, idTypePart, idAccompagnant){
+var creerUser = function(mail, nom, prenom, tel, idTypePart, idAccompagnant){
 	// s'il n'existe pas
-	if (typeof listeUser[id] === 'undefined') {
+	if (typeof listeUser[mail] === 'undefined') {
 		// on le cree
-		listeUser[id] = new User(id, nom, prenom, mail, tel, idTypePart, idAccompagnant);
+		listeUser[mail] = new User(mail, nom, prenom, tel, idTypePart, idAccompagnant);
 		return 1;
     }
     return 0;
 }
 
-var recupUser = function(id) {
+var recupUser = function(mail) {
 	// s'il n'existe pas
-	if (typeof listeUser[id] === 'undefined')
+	if (typeof listeUser[mail] === 'undefined')
 		return 0;
-    return listeUser[id];
+    return listeUser[mail];
 }
 
 exports.creerUser = creerUser;

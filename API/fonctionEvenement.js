@@ -5,7 +5,7 @@ module.exports = function (app) {
 	//Creer un evenement
 	app.post('/evenement', function(req, res){
 		
-		var id = parseInt(req.body.id, 10);ws
+		var id = parseInt(req.body.id, 10);
 		var acro = req.body.acro;
 		var nom = req.body.nom;
 		var desc = req.body.desc;

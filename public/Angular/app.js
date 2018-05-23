@@ -17,6 +17,15 @@ app.config(function($routeProvider) {
 	.when("/creerTypePart", {
 		templateUrl : "CreerTypeParticipant.html"
 	})
+	.when("/signin", {
+		templateUrl : "CreerCompte.html"
+	})
+	.when("/login", {
+		templateUrl : "Login.html"
+	})
+	.when("/creerTypePart", {
+		templateUrl : "CreerTypeParticipant.html"
+	})
 	.otherwise({
 	    template : "<h1>None</h1><p>Nothing has been selected</p>"
   });
