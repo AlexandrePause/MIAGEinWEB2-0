@@ -1,24 +1,61 @@
 <div ng-controller="inscriptionCtrl">
 
-	Vous allez vous inscrire a {{infosEvent.nom}}
-	<br>
-	Description de l'event : {{infosEvent.desc}}
-	<br>
-	Nb participant deja : {{infosEvent.nbPart}} / {{infosEvent.nbPartMax}}
-	<br>
-	Lieu : {{infosEvent.lieu}}
-	<br>
-	Debut : {{infosEvent.datOuvr}} Fin : {{infosEvent.datFerm}}
-	<br>
+	<div class="container">
+		
+		<h1 class="row justify-content-md-left">Vous allez vous inscrire à {{infosEvent.nom}}</h1>
+		<p class="row lead justify-content-md-left">Description de l'événement : {{infosEvent.desc}}</p>
+		<p class="row lead justify-content-md-left">Nombre de participant : {{infosEvent.nbPart}}/{{infosEvent.nbPartMax}}</p>
+		<p class="row lead justify-content-md-left">Lieu de rencontre : {{infosEvent.lieu}}</p>
+		<p class="row lead justify-content-md-left">Date de début : {{infosEvent.datOuvr}} / Date de fin : {{infosEvent.datFerm}}</p>
 
-	<button ng-disabled="buttonInsc" ng-click="inscription()">S'inscrire</button>
+		<div class="form-group">
+			<div class="container">
+				<div class="row justify-content-md-left">
+					<div class="col-sm-3">
+						<button ng-disabled="buttonInsc" ng-click="inscription()" class="btn btn-block">S'inscrire !</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-	<button ng-click="inscriptionAccomp()">Inscrire un accompagnant </button>
+		
+	</div>
 
-	<input ng-model="mail" name="mail" class="form-control" placeholder="@mail" type="text" required autocomplete="email">
-	<input ng-model="nom" name="nom" class="form-control" placeholder="Nom" type="text" required autocomplete="family-name">
-	<input ng-model="prenom" name="prenom" class="form-control" placeholder="Prénom" type="text" required autocomplete="name">
-	<input ng-model="tel" name="tel" class="form-control" placeholder="téléphone" type="tel" required autocomplete="tel">
+	<button ng-click="inscriptionAccomp()">Inscrire des accompagnants </button>
 
+	<div ng-repeat="x in nbAcc track by $index" class="container">
+		<ng-form name="formAcc">
+			<p class="row lead justify-content-md-left">Accompagnant {{$index+1}}</p>
+			<div class="form-group">
+				<div class="container">
+					<div class="row justify-content-md-left">
+						<input ng-model="mail[$index]" class="form-control" placeholder="@mail" type="text" required autocomplete="email">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="container">
+					<div class="row justify-content-md-left">
+						<input ng-model="nom[$index]" class="form-control" placeholder="Nom" type="text" required autocomplete="family-name">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="container">
+					<div class="row justify-content-md-left">
+						<input ng-model="prenom[$index]" class="form-control" placeholder="Prénom" type="text" required autocomplete="name">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="container">
+					<div class="row justify-content-md-left">
+						<input ng-model="tel[$index]" class="form-control" placeholder="téléphone" type="tel" required autocomplete="tel">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	
 </div>
 
