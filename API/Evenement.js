@@ -5,9 +5,9 @@ var listeEvt = [];
 
 var sequenceId = 0;
 
-listeEvt.push(new Evenement("0", "EVT1", "Evenement 1", "Premier evenemnt", "10/10/2017", "10/11/2017", "Lycée st Pierre", "30", "1"));
+listeEvt.push(new Evenement("0", "EVT1", "Evenement 1", "Premier evenemnt", "10/10/2017", "10/11/2017", "Lycée st Pierre", "30", "0"));
 
-listeEvt.push(new Evenement("1", "EVT2", "Evenement 2", "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", "1"));
+listeEvt.push(new Evenement("1", "EVT2", "Evenement 2", "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", "0"));
 
 var sequenceId = 2;
 
@@ -52,7 +52,8 @@ exports.recupEvenement = function(id) {
 	listeEvt.forEach(function(event, index){
 
 		if(event.id === id){
-			ret =  event;
+			event.nbPart = event.listeParticipant.length;
+			ret = event;
 		}
 	});
 	return ret;
@@ -96,16 +97,28 @@ exports.getAllEvenement = function(){
 	return listeEvt;
 }
 
+exports.eventComplet = function(id){
+	var event = this.recupEvenement(id);
+	var ret = true;
+	if(event){
+		if(event.listeParticipant.length >= event.nbPartMax)
+			ret = true;
+		else
+			ret = false;
+	}
+	return ret;
+}
+
 exports.getEvenementPossibleUser = function(id){
+
 	var user;
 	var tabEvent = [];
 	if(user = userData.recupUser(id)){
-
+		var complet = this.eventComplet(id);
 		listeEvt.forEach(function(element){
 			if(element.idTypePart === user.idTypePart){
-
+				element.complet = complet;
 				tabEvent.push(element);
-
 			}
 		});
 		return tabEvent;
@@ -117,8 +130,24 @@ exports.getEvenementPossibleUser = function(id){
 exports.ajouterParticipant = function(idEvent, idPart){
 	var user;
 	if(user = userData.recupUser(idPart)){
-		if(this.recupEvenement(idEvent).idTypePart === user.idTypePart){
-			this.recupEvenement(idEvent).listeParticipant.push(idPart);
+		console.log(user);
+		var event = this.recupEvenement(idEvent);
+		console.log(event);
+		if(event.idTypePart === user.idTypePart 
+			&& !this.eventComplet(idEvent)
+			&& !event.listeParticipant.includes(idPart)){
+			event.listeParticipant.push(idPart);
+			return 1;
+		}
+	}
+	return 0;
+}
+
+exports.participe = function (idEvent, idPart){
+	var user;
+	if(user = userData.recupUser(idPart)){
+		var event = this.recupEvenement(idEvent);
+		if(event.listeParticipant.includes(idPart)){
 			return 1;
 		}
 	}

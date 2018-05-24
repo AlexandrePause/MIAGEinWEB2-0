@@ -1,0 +1,24 @@
+<div ng-controller="inscriptionCtrl">
+
+	Vous allez vous inscrire a {{infosEvent.nom}}
+	<br>
+	Description de l'event : {{infosEvent.desc}}
+	<br>
+	Nb participant deja : {{infosEvent.nbPart}} / {{infosEvent.nbPartMax}}
+	<br>
+	Lieu : {{infosEvent.lieu}}
+	<br>
+	Debut : {{infosEvent.datOuvr}} Fin : {{infosEvent.datFerm}}
+	<br>
+
+	<button ng-disabled="buttonInsc" ng-click="inscription()">S'inscrire</button>
+
+	<button ng-click="inscriptionAccomp()">Inscrire un accompagnant </button>
+
+	<input ng-model="mail" name="mail" class="form-control" placeholder="@mail" type="text" required autocomplete="email">
+	<input ng-model="nom" name="nom" class="form-control" placeholder="Nom" type="text" required autocomplete="family-name">
+	<input ng-model="prenom" name="prenom" class="form-control" placeholder="Prénom" type="text" required autocomplete="name">
+	<input ng-model="tel" name="tel" class="form-control" placeholder="téléphone" type="tel" required autocomplete="tel">
+
+</div>
+

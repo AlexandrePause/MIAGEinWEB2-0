@@ -71,4 +71,18 @@ module.exports = function (app) {
 	app.get('/EvenementPossibleUser/id=:id', function(req, res){
 		res.send(evenement.getEvenementPossibleUser(req.params.id));
 	});
+
+	app.post('/inscriptionUser', function(req, res){
+		var idUser = req.body.idUser;
+		var idEvent = req.body.idEvent;
+		var reussi = evenement.ajouterParticipant(idEvent, idUser);
+		if(reussi)
+			res.status(200).send();
+		else
+			res.status(400).send();
+	});
+
+	app.get('/participe/idEvent=:idEvent&idUser=:idUser', function(req, res){
+		res.send(evenement.participe(req.params.idEvent,req.params.idUser).toString());
+	});
 };

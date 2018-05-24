@@ -38,11 +38,20 @@ module.exports = function (app) {
 		var idTypePart = req.body.idTypePart;
 		var idAccompagnant = req.body.idAccompagnant;
 
-		if(users.creerUser(mail, nom, prenom, idTypePart, idAccompagnant)){
+		if(users.creerUser(mail, nom, prenom, tel, idTypePart, idAccompagnant)){
 			res.status(200).send("Compte accompagnant créé");;
 		}
 		else
 			res.status(400).send("Le compte existe deja");
+	});
+
+
+	app.delete('/user/id=:id', function(req,res){
+
+		if(users.supprUser(req.params.id))
+			res.status(200).send("User supprimé");
+		else
+			res.status(404).send("User non trouvé");
 	});
 };
 

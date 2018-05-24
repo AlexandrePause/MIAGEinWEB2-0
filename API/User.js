@@ -38,3 +38,14 @@ exports.recupUser = function(mail) {
 	}
 	return {};
 }
+
+exports.supprUser = function(id){;
+	var idTab;
+	if (this.userExiste(id)) 
+		return 0;
+	delete listeUser[idTab];
+	return 1;
+}
+
+
+this.creerUser("yanekcolonge@hotmail.fr", "Colonge", "Yanek", "06", "0", "-1");
