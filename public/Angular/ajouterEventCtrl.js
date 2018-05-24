@@ -30,7 +30,11 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 	$http.get("http://localhost:3000/allType")
 	.then(function(response) {
 		$scope.listeType = response.data;
-		$scope.typePart = $scope.listeType[data.typePart];
+		$scope.listeType.forEach(function(element){
+        	if(element.id === data.idTypePart)
+        		$scope.idTypePart = element;
+        });
+
    		if(typeof $routeParams.id !== 'undefined'){
 			$http.get("http://localhost:3000/evenement/id="+$routeParams.id)
 			.then(function(response) {
@@ -42,7 +46,15 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 				$scope.dateFerm = response.data.datFerm;
 				$scope.lieu = response.data.lieu;
 				$scope.nbPartMax = parseInt(response.data.nbPartMax);
-	            $scope.typePart = $scope.listeType[response.data.typePart];
+
+				console.log($scope.listeType);
+				console.log(response.data.idTypePart);
+
+	            $scope.listeType.forEach(function(element){
+	            	if(element.id === response.data.idTypePart)
+	            		$scope.idTypePart = element;
+	            });
+
 			});
 		}
 	});
@@ -53,10 +65,10 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 
 		var idSelect;
 
-		if(typeof $scope.typePart === 'undefined')
+		if(typeof $scope.idTypePart === 'undefined')
 			idSelect = -1;
 		else
-			idSelect = $scope.typePart.id;
+			idSelect = $scope.idTypePart.id;
 
 		$http.get("http://localhost:3000/typeExist/id="+idSelect)
 			.then(function(response) {
@@ -71,7 +83,7 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 							"datFerm" : $scope.dateFerm,
 							"lieu" : $scope.lieu,
 							"nbPartMax" : $scope.nbPartMax,
-							"typePart" : idSelect
+							"idTypePart" : idSelect
 						}
 
 						$http.put("http://localhost:3000/evenement/id="+$routeParams.id, toPost)
@@ -83,29 +95,25 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 						});
 	       			}
 	       			else{
-	       				$http.get("http://localhost:3000/lastIdEvent")
-						.then(function(response) {
-				       		
-				       		toPost = {
-								"id" : parseInt(response.data.id)+1,
-								"acro" : $scope.acro,
-								"nom" : $scope.nom,
-								"desc" : $scope.desc,
-								"datOuvr" : $scope.dateOuv,
-								"datFerm" : $scope.dateFerm,
-								"lieu" : $scope.lieu,
-								"nbPartMax" : $scope.nbPartMax,
-								"typePart" : idSelect
-							}
+	       					
+			       		toPost = {
+							"acro" : $scope.acro,
+							"nom" : $scope.nom,
+							"desc" : $scope.desc,
+							"datOuvr" : $scope.dateOuv,
+							"datFerm" : $scope.dateFerm,
+							"lieu" : $scope.lieu,
+							"nbPartMax" : $scope.nbPartMax,
+							"idTypePart" : idSelect
+						}
 
-							$http.post("http://localhost:3000/evenement", toPost)
-							.then(function(res){
-								deleteData();
-								$location.path('/ListeEvent');
-							}, function(res){
-								$scope.error = res.body;
-							});
-				    	});
+						$http.post("http://localhost:3000/evenement", toPost)
+						.then(function(res){
+							deleteData();
+							$location.path('/ListeEvent');
+						}, function(res){
+							$scope.error = res.body;
+						});
 	       			}
 	       		}
 	       		else{
@@ -131,10 +139,10 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 
     	var idSelect;
 
-		if(typeof $scope.typePart === 'undefined')
+		if(typeof $scope.idTypePart === 'undefined')
 			idSelect = -1;
 		else
-			idSelect = $scope.typePart.id;
+			idSelect = $scope.idTypePart.id;
 
     	sauvegardeDataEvent.set(
 			{
@@ -145,7 +153,7 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 				"dateFerm" : $scope.dateFerm,
 				"lieu" : $scope.lieu,
 				"nbPartMax" : $scope.nbPartMax,
-				"typePart" : idSelect
+				"idTypePart" : idSelect
 		});
     };
 

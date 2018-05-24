@@ -1,5 +1,25 @@
-<a href="#!ListeEvent">ListeEvent</a>
-<br>
-<a href="#!signin">sign in</a>
-<br>
-<a href="#!login">log in</a>
+<div class="container">
+	<h1 class="row justify-content-md-center">Gestionnaire d'événements</h1>
+</div>
+
+
+<div ng-controller="accueilCtrl">
+
+	<div class="form-group">
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-sm-3">
+					<button class="btn btn-block" ng-click="administration()">Administration</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-block" ng-click="creerCompte()">S'inscrire</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-block" ng-click="connexion()">Se connecter</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<a href="#!listeEventInscriptionUser">S'inscrire a un evenement</a>

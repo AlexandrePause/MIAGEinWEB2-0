@@ -1,0 +1,41 @@
+<div class="container">
+	<h1 class="row justify-content-md-center">S'inscrire a un evenement</h1>
+</div>
+<div ng-controller="listeEventInscriptionUserCtrl">
+	<div class="container">
+  	<table class="table table-bordered" id="listeEvent">
+  		<thead>
+  			<tr>
+  				<th>Acronyme</th>
+  				<th>Nom</th>
+  				<th>Lieu</th>
+  				<th>Ouverture inscription</th>
+  				<th>Fermeture inscription</th>
+  				<th>Actions</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<tr ng-repeat="x in listeEvent" id="{{x.id}}">
+  				<td>{{ x.acro }}</td>
+  				<td>{{ x.nom }}</td>
+  				<td>{{ x.lieu }}</td>
+  				<td>{{ x.datOuvr }}</td>
+  				<td>{{ x.datFerm }}</td>
+  				<td>
+  					<button class="btn" ng-click="inscrire(x.id)" >S'inscrire</button>
+  				</td>
+  			</tr>
+  		</tbody>
+  	</table>
+	</div>
+
+	<div class="form-group">
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-sm-3">
+					<button class="btn btn-block" ng-click="modifier()">Ajouter un Evènement</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

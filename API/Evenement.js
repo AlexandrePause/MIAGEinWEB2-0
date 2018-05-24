@@ -1,29 +1,24 @@
 var typeParticipant = require('./TypeParticipant');
-var listeEvt = {};
+var userData = require('./User');
 
-listeEvt[1] = {
-	"id" : 1,
-	"acro" : "EVT1",
-	"nom" : "Evenement 1",
-	"desc" : "Premier evenemnt",
-	"datOuvr" : "10/10/2017",
-	"datFerm" : "10/11/2017",
-	"lieu" : "Lycée st Pierre",
-	"nbPartMax" : "30",
-	"typePart" : "1"
-};
+var listeEvt = [];
 
-listeEvt[10] = {
-	"id" : 10,
-	"acro" : "EVT2",
-	"nom" : "Evenement 2",
-	"desc" : "Second evenemnt",
-	"datOuvr" : "02/05/2018",
-	"datFerm" : "10/07/2018",
-	"lieu" : "Salle Robert Piteu",
-	"nbPartMax" : "50",
-	"typePart" : "10"
-};
+var sequenceId = 0;
+
+listeEvt.push(new Evenement("0", "EVT1", "Evenement 1", "Premier evenemnt", "10/10/2017", "10/11/2017", "Lycée st Pierre", "30", "1"));
+
+listeEvt.push(new Evenement("1", "EVT2", "Evenement 2", "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", "1"));
+
+var sequenceId = 2;
+
+function existe(id){
+	listeEvt.forEach(function(event, index){
+		if(event.id === id)
+			return index;
+	});
+	return false;
+}
+
 
 function Evenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTypePart){
 	this.id = id;
@@ -35,77 +30,97 @@ function Evenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTyp
 	this.lieu = lieu;
 	this.nbPartMax = nbPartMax;
 	this.idTypePart = idTypePart;
+	this.listeParticipant = [];
 }
 
-var dernierId = function(){
-	var ancId = 0;
-	for(var id in listeEvt){
-		if(id > ancId){
-			ancId = id;
-		}
+exports.creerEvt = function(acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart){
+	
+	//Si le type existe
+	if(typeParticipant.recupTypePart(typePart)){
+		// on le cree
+		listeEvt.push(new Evenement(sequenceId.toString(), acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart));
+		sequenceId++;
+		return 1;
 	}
-	return ancId
+
+	return 0;
 }
 
-var creerEvt = function(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart){
+exports.recupEvenement = function(id) {
 	// s'il n'existe pas
-	if (typeof listeEvt[id] === 'undefined') {
-		//Si le type existe
-		if(typeParticipant.recupTypePart(typePart)){
-			// on le cree
-			listeEvt[id] = new Evenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart);
-			return 1;
+	var ret = false;
+	listeEvt.forEach(function(event, index){
+
+		if(event.id === id){
+			ret =  event;
 		}
-    }
-    return 0;
+	});
+	return ret;
 }
 
-var recupEvenement = function(id) {
-	// s'il n'existe pas
-	if (typeof listeEvt[id] === 'undefined')
-		return {};
-    return listeEvt[id];
-}
+exports.supprEvenement = function(id){
+	var idTab;
 
-var supprEvenement = function(id){
-	if (typeof listeEvt[id] === 'undefined') 
+	if (idTab = existe(id)) 
 		return 0;
-	delete listeEvt[id];
+	delete listeEvt[idTab];
 	return 1;
 }
 
-var modifEvenement = function(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart){
-	if (typeof listeEvt[id] === 'undefined') 
+exports.modifEvenement = function(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart){
+	if (existe(id)) 
 		return 0;
 	//Si le type existe on le modifie
 	else{ 
 		if(typeof acro !== 'undefined')
-			listeEvt[id].acro = acro;
+			this.recupEvenement(id).acro = acro;
 		if(typeof nom !== 'undefined')
-			listeEvt[id].nom = nom;
+			this.recupEvenement(id).nom = nom;
 		if(typeof desc !== 'undefined')
-			listeEvt[id].desc = desc;
+			this.recupEvenement(id).desc = desc;
 		if(typeof datOuvr !== 'undefined')
-			listeEvt[id].datOuvr = datOuvr;
+			this.recupEvenement(id).datOuvr = datOuvr;
 		if(typeof datFerm !== 'undefined')
-			listeEvt[id].datFerm = datFerm;
+			this.recupEvenement(id).datFerm = datFerm;
 		if(typeof lieu !== 'undefined')
-			listeEvt[id].lieu = lieu;
+			this.recupEvenement(id).lieu = lieu;
 		if(typeof nbPartMax !== 'undefined')
-			listeEvt[id].nbPartMax = nbPartMax;
+			this.recupEvenement(id).nbPartMax = nbPartMax;
 		if(typeof typePart !== 'undefined' && typeParticipant.recupTypePart(typePart))
-			listeEvt[id].typePart = typePart;
+			this.recupEvenement(id).typePart = typePart;
 		return 1;
 	}
 }
 
-var getAllEvenement = function(){
+exports.getAllEvenement = function(){
 	return listeEvt;
 }
 
-exports.creerEvt = creerEvt;
-exports.recupEvenement = recupEvenement;
-exports.supprEvenement = supprEvenement;
-exports.modifEvenement = modifEvenement;
-exports.dernierId = dernierId;
-exports.getAllEvenement = getAllEvenement;
+exports.getEvenementPossibleUser = function(id){
+	var user;
+	var tabEvent = [];
+	if(user = userData.recupUser(id)){
+
+		listeEvt.forEach(function(element){
+			if(element.idTypePart === user.idTypePart){
+
+				tabEvent.push(element);
+
+			}
+		});
+		return tabEvent;
+	}
+	else
+		return [];
+}
+
+exports.ajouterParticipant = function(idEvent, idPart){
+	var user;
+	if(user = userData.recupUser(idPart)){
+		if(this.recupEvenement(idEvent).idTypePart === user.idTypePart){
+			this.recupEvenement(idEvent).listeParticipant.push(idPart);
+			return 1;
+		}
+	}
+	return 0;
+}

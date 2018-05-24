@@ -1,4 +1,4 @@
-var app = angular.module("MIAGEin", ["ngRoute"]);
+var app = angular.module("MIAGEin", ["ngRoute", "ngCookies"]);
 
 app.config(function($routeProvider) {
   $routeProvider
@@ -25,6 +25,9 @@ app.config(function($routeProvider) {
 	})
 	.when("/creerTypePart", {
 		templateUrl : "CreerTypeParticipant.html"
+	})
+	.when("/listeEventInscriptionUser", {
+		templateUrl : "ListeEventInscriptionUser.html"
 	})
 	.otherwise({
 	    template : "<h1>None</h1><p>Nothing has been selected</p>"

@@ -2,13 +2,13 @@
 	<h1 class="row justify-content-md-center">Se connecter</h1>
 </div>
 
-<form ng-controller="loginCtrl">
+<form ng-controller="loginCtrl" autocomplete="on">
 	
 	<div class="form-group">
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-sm-7">
-					<input ng-model="mail" name="mail" class="form-control" placeholder="Mail" type="mail">
+					<input ng-model="mail" name="mail" class="form-control" placeholder="Mail" type="mail" autocomplete="email">
 				</div>
 			</div>
 		</div>
@@ -18,7 +18,7 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-sm-7">
-					<input ng-model="password" class="form-control" placeholder="Mot de passe" type="password">
+					<input ng-model="password" class="form-control" placeholder="Mot de passe" type="password" autocomplete="current-password">
 				</div>
 			</div>
 		</div>

@@ -1,14 +1,19 @@
-var listeTypePart = {};
-listeTypePart[1] = {
-	"id" : 1,
-	"denom" : "Etudiant",
-	"nbMax" : 2		
-}
+var listeTypePart = [];
 
-listeTypePart[10] = {
-	"id" : 10,
-	"denom" : "Professeur",
-	"nbMax" : 3		
+var sequenceId = 0;
+
+listeTypePart.push(new TypeParticipant("0", "Etudiant", 2));
+
+listeTypePart.push(new TypeParticipant("1", "Professeur", 3));
+sequenceId = 2;
+
+exports.typeExist = function(id){
+	ret = false;
+	listeTypePart.forEach(function(event, index){
+		if(event.id === id)
+			ret = index;
+	});
+	return ret;
 }
 
 function TypeParticipant(id, denom, maxAcc){
@@ -17,68 +22,45 @@ function TypeParticipant(id, denom, maxAcc){
 	this.maxAcc = maxAcc;
 }
 
-var creerTypePart = function(id, denom, maxAcc){
-	// s'il n'existe pas
-	if (typeof listeTypePart[id] === 'undefined') {
-		// on le cree
-		listeTypePart[id] = new TypeParticipant(id, denom, maxAcc);
-		return 1;
-    }
-    return 0;
-}
-
-var recupTypePart = function(id) {
-	// s'il n'existe pas
-	if (typeof listeTypePart[id] === 'undefined')
-		return 0;
-    return listeTypePart[id];
-}
-
-var supprTypePart = function(id){
-	if (typeof listeTypePart[id] === 'undefined') 
-		return 0;
-	delete listeTypePart[id];
+exports.creerTypePart = function(denom, maxAcc){
+	
+	listeTypePart.push(new TypeParticipant(sequenceId.toString(), denom, maxAcc));
+	sequenceId++;
 	return 1;
 }
 
-var modifTypePart = function(id, denom, maxAcc){
-	if (typeof listeTypePart[id] === 'undefined') 
+exports.recupTypePart = function(id) {
+	// s'il n'existe pas	
+	var ret = false;
+	listeTypePart.forEach(function(typePart, index){
+		if(typePart.id === id){
+			ret =  typePart;
+		}
+	});
+	return ret;
+}
+
+exports.supprTypePart = function(id){
+	var idTab;
+	if (typeExist(id)) 
+		return 0;
+	delete listeTypePart[idTab];
+	return 1;
+}
+
+exports.modifTypePart = function(id, denom, maxAcc){
+	if (typeExist(id)) 
 		return 0;
 	//Si le type existe on le modifie
 	else{ 
 		if(typeof denom !== 'undefined')
-			listeTypePart[id].denom = denom;
+			recupTypePart(id).denom = denom;
 		if(typeof maxAcc !== 'undefined')
-			listeTypePart[id].maxAcc = maxAcc;
+			recupTypePart(id).maxAcc = maxAcc;
 		return 1;
 	}
 }
 
-var typeExist = function(id){
-	if (typeof listeTypePart[id] !== 'undefined') 
-		return 1;
-	else
-		return 0;
-}
-
-var dernierId = function(){
-	var ancId = 0;
-	for(var id in listeTypePart){
-		if(id > ancId){
-			ancId = id;
-		}
-	}
-	return ancId
-}
-
-var getAllType = function(){
+exports.getAllType = function(){
 	return listeTypePart;
 }
-
-exports.creerTypePart = creerTypePart;
-exports.recupTypePart = recupTypePart;
-exports.supprTypePart = supprTypePart;
-exports.modifTypePart = modifTypePart;
-exports.typeExist = typeExist;
-exports.dernierId = dernierId;
-exports.getAllType = getAllType;

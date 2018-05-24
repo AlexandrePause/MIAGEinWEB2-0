@@ -3,8 +3,12 @@ var users = require('./User');
 module.exports = function (app) {
 	app.get('/user/id=:id', function(req, res){
 		
-		//Recupere un user
-		res.json(users.recupUser(req.params.id));
+		//Recupere un user	
+		var user = users.recupUser(req.params.id);
+		if(!user)
+			res.status(400).send("Le compte n'existe pas");
+		else
+			res.json(user);
 	});
 
 	//Creation d'un utilisateur normal
