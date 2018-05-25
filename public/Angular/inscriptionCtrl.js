@@ -22,6 +22,13 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
     $http.get("http://localhost:3000/userAccomp/id="+token)
     .then(function (response) {
     	//Retourne les accompagnants
+    	var stringAcc = "";
+
+    	response.data.forEach(function(elem){
+    		stringAcc += ""+elem.mail+" "+elem.nom+" "+elem.prenom+" "+elem.tel+"<br>";
+    	});
+
+    	$scope.divAcc = stringAcc;
     });
 
 
@@ -73,9 +80,9 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
 			$http.post("http://localhost:3000/inscriptionUser", toPostEvent)
 			.then(function(res){
 				alert("accompagnant Ajouté");
-				$scope.divAcc = 'Coucou';
+				$scope.divAcc += $scope.mail+" "+$scope.nom+" "+$scope.prenom+" "+$scope.tel+"<br>";
 			}, function(res){
-				$http.delete("http://localhost:3000/user/id="+mail)
+				$http.delete("http://localhost:3000/user/id="+$scope.mail)
 				.then(function(res){
 					alert("accompagnant Supprimé");
 				});
@@ -84,7 +91,7 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
 
 
 		}, function(res){
-			alert("Le compte a cette adresse existe deja");
+			alert(res.data);
 		});
     }
 
