@@ -37,12 +37,16 @@ module.exports = function (app) {
 		var tel = req.body.tel;
 		var idTypePart = req.body.idTypePart;
 		var idAccompagnant = req.body.idAccompagnant;
-
-		if(users.creerUser(mail, nom, prenom, tel, idTypePart, idAccompagnant)){
-			res.status(200).send("Compte accompagnant créé");;
+		if(users.peutAjouterAcc(idAccompagnant)){
+			if(users.creerUser(mail, nom, prenom, tel, idTypePart, idAccompagnant)){
+				res.status(200).send("Compte accompagnant créé");;
+			}
+			else
+				res.status(400).send("Le compte existe deja");
 		}
 		else
-			res.status(400).send("Le compte existe deja");
+			res.status(400).send("L'utilisateur ne peut plus ajouter d'accompagnant");
+		
 	});
 
 
@@ -52,6 +56,26 @@ module.exports = function (app) {
 			res.status(200).send("User supprimé");
 		else
 			res.status(404).send("User non trouvé");
+	});
+
+	app.get('/userAccomp/id=:id', function(req, res){
+		
+		//Recupere un user	
+		var user = users.getUserAcc(req.params.id);
+		if(!user)
+			res.status(400).send("Le compte n'existe pas");
+		else
+			res.json(user);
+	});
+
+	app.get('/peutAjouterAccomp/id=:id', function(req, res){
+		
+		//Recupere un user	
+		var user = users.peutAjouterAcc(req.params.id);
+		if(!user)
+			res.status(200).send("false");
+		else
+			res.status(200).send("true");
 	});
 };
 

@@ -1,4 +1,4 @@
-var app = angular.module("MIAGEin", ["ngRoute", "ngCookies"]);
+var app = angular.module("MIAGEin", ["ngRoute", "ngCookies", "ngSanitize"]);
 
 app.config(function($routeProvider) {
   $routeProvider

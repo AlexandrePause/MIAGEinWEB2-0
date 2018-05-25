@@ -1,3 +1,6 @@
+var typeParticipant = require('./TypeParticipant');
+
+
 var listeUser = [];
 
 function User(mail, nom, prenom, tel, idTypePart, idAccompagnant){
@@ -47,5 +50,25 @@ exports.supprUser = function(id){;
 	return 1;
 }
 
+exports.peutAjouterAcc = function(id){
+	var user = this.recupUser(id);
+	var typeCompte = typeParticipant.recupTypePart(user.idTypePart);
+	if(typeCompte.maxAcc > this.getUserAcc(id).length)
+		return true;
+	return false;
+}
+
+exports.getUserAcc = function(mail){
+	var ret = [];
+	listeUser.forEach(function(user, index){
+		
+		if(user.idAccompagnant === mail)
+			ret.push(user);
+	});
+	return ret;
+}
 
 this.creerUser("yanekcolonge@hotmail.fr", "Colonge", "Yanek", "06", "0", "-1");
+this.creerUser("jeanbon@hotmail.fr", "Bon", "Jean", "06", "0", "-1");
+this.creerUser("guilhemquintoch@hotmail.fr", "Quintoch", "Guilhem", "06", "0", "-1");
+this.creerUser("alexpausey@hotmail.fr", "Pausey", "Alex", "06", "0", "yanekcolonge@hotmail.fr");
