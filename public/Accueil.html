@@ -1,25 +1,39 @@
+<div ng-controller="accueilCtrl">
+<div class="topHautDroit">
+	<button  class="btn btn-block" ng-click="connexion()">{{ connexionStatus }}</button>
+</div>
 <div class="container">
 	<h1 class="row justify-content-md-center">Gestionnaire d'événements</h1>
+	<h2 class="row justify-content-md-center">{{ nomUser }}</h2>
+</div>
+
+<div class="form-group">
+		
 </div>
 
 
-<div ng-controller="accueilCtrl">
+
 
 	<div class="form-group">
 		<div class="container">
 			<div class="row justify-content-md-center">
-				<div class="col-sm-3">
-					<button class="btn btn-block" ng-click="administration()">Administration</button>
+				<div ng-if="nomUser == 'Bonjour administrateur du service'" class="col-sm-3">
+					<button class="btn btn-block btn-danger" ng-click="administration()">Administration</button>
 				</div>
-				<div class="col-sm-3">
-					<button class="btn btn-block" ng-click="creerCompte()">S'inscrire</button>
+				<div ng-if="nomUser != 'Bonjour administrateur du service'" class="col-sm-3">
+					<div ng-if="!nomUser || nomUser.length <2">
+						<button class="btn btn-block btn-success" ng-click="creerCompte()">S'inscrire</button>
+					</div>
 				</div>
-				<div class="col-sm-3">
-					<button class="btn btn-block" ng-click="connexion()">Se connecter</button>
+				
+				
+			</div>
+			<br>
+			<div ng-if="nomUser != 'Bonjour administrateur du service'" class="row justify-content-md-center">
+				<div class="col-md-6">
+					<a style="text-decoration: none" href="#!listeEventInscriptionUser"><button class="btn btn-block btn-info">Listes des évènements</button></a>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-<a href="#!listeEventInscriptionUser">S'inscrire a un evenement</a>

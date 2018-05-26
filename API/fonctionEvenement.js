@@ -18,7 +18,7 @@ module.exports = function (app) {
 		if(evenement.creerEvt(acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart))
 			res.status(201).send("Votre evenement a été ajouté.");
 		else
-			res.status(409).send("L'id existe deja ou le type de particpant n'existe pas. Votre evenement n'a pas été ajouté.");
+			res.status(409).send("L'id existe deja ou le type de participant n'existe pas. Votre evenement n'a pas été ajouté.");
 	});
 
 
@@ -84,5 +84,6 @@ module.exports = function (app) {
 
 	app.get('/participe/idEvent=:idEvent&idUser=:idUser', function(req, res){
 		res.send(evenement.participe(req.params.idEvent,req.params.idUser).toString());
+
 	});
 };

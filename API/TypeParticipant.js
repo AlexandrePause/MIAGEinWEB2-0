@@ -5,6 +5,8 @@ var sequenceId = 0;
 listeTypePart.push(new TypeParticipant("0", "Etudiant", 2));
 
 listeTypePart.push(new TypeParticipant("1", "Professeur", 3));
+
+
 sequenceId = 2;
 
 exports.typeExist = function(id){

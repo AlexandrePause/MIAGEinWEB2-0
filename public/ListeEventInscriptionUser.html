@@ -1,5 +1,5 @@
 <div class="container">
-	<h1 class="row justify-content-md-center">S'inscrire a un evenement</h1>
+	<h1 class="row justify-content-md-center">S'inscrire à un évènement</h1>
 </div>
 <div ng-controller="listeEventInscriptionUserCtrl">
 	<div class="container">
@@ -11,6 +11,7 @@
   				<th>Lieu</th>
   				<th>Ouverture inscription</th>
   				<th>Fermeture inscription</th>
+          <th>Nombre de places</th>
   				<th>Actions</th>
   			</tr>
   		</thead>
@@ -21,11 +22,16 @@
   				<td>{{ x.lieu }}</td>
   				<td>{{ x.datOuvr }}</td>
   				<td>{{ x.datFerm }}</td>
+          <td>{{x.nbPart}}/{{x.nbPartMax}}</td>
   				<td>
-  					<button class="btn" ng-click="inscrire(x.id)" >S'inscrire</button>
+            <button ng-if="x.nbPart < x.nbPartMax || !x.nbPart" class="btn" ng-click="inscrire(x.id)" >S'inscrire</button>
+            <text ng-if="x.nbPartMax == x.nbPart">Complet</text>
   				</td>
   			</tr>
   		</tbody>
   	</table>
+    <div class="col-sm-3">
+            <button type="button" class="btn btn-block  btn-warning" ng-click="retour()">Retour</button>
+    </div>
 	</div>
 </div>

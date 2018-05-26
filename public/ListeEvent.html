@@ -11,6 +11,7 @@
   				<th>Lieu</th>
   				<th>Ouverture inscription</th>
   				<th>Fermeture inscription</th>
+          <th>Nombre de participant actuel</th>
   				<th>Actions</th>
   			</tr>
   		</thead>
@@ -21,6 +22,7 @@
   				<td>{{ x.lieu }}</td>
   				<td>{{ x.datOuvr }}</td>
   				<td>{{ x.datFerm }}</td>
+          <td> {{x.nbPart}}/{{x.nbPartMax}} </td>
   				<td>
   					<button class="btn" ng-click="modifier(x.id)" >Modifier</button>
   					<button class="btn" ng-click="supprimer(x.id)">Supprimer</button>
@@ -33,6 +35,9 @@
 	<div class="form-group">
 		<div class="container">
 			<div class="row justify-content-md-center">
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-block  btn-danger" ng-click="retour()">Annuler</button>
+        </div>
 				<div class="col-sm-3">
 					<button class="btn btn-block" ng-click="modifier()">Ajouter un Evènement</button>
 				</div>

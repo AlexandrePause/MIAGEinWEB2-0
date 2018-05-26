@@ -1,5 +1,9 @@
 app.controller('creerCompteCtrl', function($scope, $http, $location) {
 
+	$scope.retour = function(){
+         $location.path("/");
+    }
+
 	$http.get("http://localhost:3000/allType")
 	.then(function(response) {
 		$scope.listeType = response.data;
@@ -8,10 +12,11 @@ app.controller('creerCompteCtrl', function($scope, $http, $location) {
 	$scope.enregistrer = function(){
    		var toPost = {
 			"mail": $scope.mail,
+			"mdp": $scope.password,
 		    "nom": $scope.nom,
 		    "prenom": $scope.prenom,
 		    "tel": $scope.tel,
-		    "idTypePart": $scope.idTypePart
+		    "idTypePart": $scope.idTypePart.id
 		};
 		
 		if($scope.formCreerCompte.$valid){
@@ -20,7 +25,7 @@ app.controller('creerCompteCtrl', function($scope, $http, $location) {
 	       		if(response.data.existe === true){
 					$http.post("http://localhost:3000/addUser", toPost)
 					.then(function(res){
-						$location.path('/');
+						$location.path('/login');
 					}, function(res){
 						alert("Le compte a cette adresse existe deja")
 						$scope.error = res.body;

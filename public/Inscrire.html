@@ -12,7 +12,10 @@
 			<div class="container">
 				<div class="row justify-content-md-left">
 					<div class="col-sm-3">
-						<button ng-disabled="buttonInsc" ng-click="inscription()" class="btn btn-block">S'inscrire !</button>
+  					<button type="button" class="btn btn-block  btn-danger" ng-click="retour()">Annuler</button>
+  					</div>
+					<div class="col-sm-3">
+						<button ng-disabled="buttonInsc" ng-click="inscription()" class="btn btn-block">{{ sinscriretxt }}</button>
 					</div>
 				</div>
 			</div>

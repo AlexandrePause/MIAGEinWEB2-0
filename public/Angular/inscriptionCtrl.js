@@ -1,5 +1,10 @@
 app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $routeParams) {
 
+    var sinscriretxt = "S'inscrire";
+
+    $scope.retour = function(){
+         $location.path("/listeEventInscriptionUser");
+    }
 
 	var token = $cookies.get("token");
 	$scope.accompagnants = [];
@@ -34,10 +39,14 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
 
     $http.get("http://localhost:3000/participe/idEvent="+$routeParams.id+"&idUser="+token)
     .then(function (response) {
-    	if(response.data === '0')
-    		$scope.buttonInsc = false;
-    	else
-    		$scope.buttonInsc = true;
+    	if(response.data === "0"){
+            $scope.sinscriretxt = "S'inscrire";
+            $scope.buttonInsc = false;  
+        }
+    	else{
+            $scope.sinscriretxt  = "Vous êtes déjà inscrit";
+            $scope.buttonInsc = true;
+        }
     });
 
     $scope.inscription = function(){
@@ -49,6 +58,7 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
     	$http.post("http://localhost:3000/inscriptionUser", toPost)
 	    .then(function (response) {
 	        $scope.buttonInsc = true;
+            $scope.sinscriretxt  = "Inscription prise en compte";
 	        $http.get("http://localhost:3000/evenement/id="+$routeParams.id)
 		    .then(function (response) {
 		        $scope.infosEvent = response.data;
@@ -79,12 +89,12 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
 
 			$http.post("http://localhost:3000/inscriptionUser", toPostEvent)
 			.then(function(res){
-				alert("accompagnant Ajouté");
+				alert("Accompagnant Ajouté");
 				$scope.divAcc += $scope.mail+" "+$scope.nom+" "+$scope.prenom+" "+$scope.tel+"<br>";
 			}, function(res){
 				$http.delete("http://localhost:3000/user/id="+$scope.mail)
 				.then(function(res){
-					alert("accompagnant Supprimé");
+					alert("Accompagnant Supprimé");
 				});
 				alert("Impossible d'ajouter l'accompagnant a l'event");
 			});

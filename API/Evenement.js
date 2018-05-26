@@ -5,11 +5,9 @@ var listeEvt = [];
 
 var sequenceId = 0;
 
-listeEvt.push(new Evenement("0", "EVT1", "Evenement 1", "Premier evenemnt", "10/10/2017", "10/11/2017", "Lycée st Pierre", "30", "0"));
+var onlyOne = 0;
 
-listeEvt.push(new Evenement("1", "EVT2", "Evenement 2", "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", "0"));
-
-var sequenceId = 2;
+remplirEvt();
 
 function existe(id){
 	listeEvt.forEach(function(event, index){
@@ -113,12 +111,18 @@ exports.getEvenementPossibleUser = function(id){
 
 	var user;
 	var tabEvent = [];
+
 	if(user = userData.recupUser(id)){
+
 		var complet = this.eventComplet(id);
 		listeEvt.forEach(function(element){
 			if(element.idTypePart === user.idTypePart){
-				element.complet = complet;
-				tabEvent.push(element);
+				var dateNow = new Date();
+				var date = new Date(element.datFerm);
+				if(dateNow<date){
+					element.complet = complet;
+					tabEvent.push(element);
+				}	
 			}
 		});
 		return tabEvent;
@@ -127,15 +131,31 @@ exports.getEvenementPossibleUser = function(id){
 		return [];
 }
 
+exports.isIncluded = function(listeParticipant, idPart){
+	var bool = false;
+
+	if(listeParticipant[0] === idPart ){
+		bool = true;
+	}
+	else{
+		listeParticipant.forEach(function(element){
+			if(element === idPart){
+				bool = true;
+			}
+	});
+	}
+	return bool;
+}
+
 exports.ajouterParticipant = function(idEvent, idPart){
 	var user;
 	if(user = userData.recupUser(idPart)){
-		console.log(user);
+
 		var event = this.recupEvenement(idEvent);
-		console.log(event);
+
 		if(event.idTypePart === user.idTypePart 
 			&& !this.eventComplet(idEvent)
-			&& !event.listeParticipant.includes(idPart)){
+			&& !this.isIncluded(event.listeParticipant, idPart)){
 			event.listeParticipant.push(idPart);
 			return 1;
 		}
@@ -143,13 +163,55 @@ exports.ajouterParticipant = function(idEvent, idPart){
 	return 0;
 }
 
+
 exports.participe = function (idEvent, idPart){
 	var user;
 	if(user = userData.recupUser(idPart)){
 		var event = this.recupEvenement(idEvent);
-		if(event.listeParticipant.includes(idPart)){
+
+		if(event.nbPart === "0"){
+			return 0;
+		}
+		else{
+			if(this.isIncluded(event.listeParticipant, idPart)){
 			return 1;
+			}
 		}
 	}
 	return 0;
+}
+
+
+
+function remplirEvt(){
+	listeEvt.push(new Evenement(sequenceId.toString(), "EVT"+sequenceId.toString(), "Evenement "+sequenceId.toString(), "Premier evenemnt", "10/10/2017", "10/11/2017", "Lycée st Pierre", "30", "0"));
+	sequenceId++;
+	listeEvt.push(new Evenement(sequenceId.toString(), "EVT"+sequenceId.toString(), "Evenement " +sequenceId.toString(), "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", "0"));
+	sequenceId++;
+	listeEvt.push(new Evenement(sequenceId.toString(), "EVT"+sequenceId.toString(), "Evenement Magique", "Troisieme evenemnt", "08/05/2018", "10/08/2018", "Salle à définir", "50", "0"));
+	sequenceId++;
+	listeEvt.push(new Evenement(sequenceId.toString(), "EVT PROF"+sequenceId.toString(), "Apprendre", "Q evenemnt", "08/05/2018", "10/08/2018", "Salle à choisir", "2", "1"));
+	sequenceId++;
+	listeEvt.push(new Evenement(sequenceId.toString(), "EVT PROF"+sequenceId.toString(), "Comprendre", "S evenemnt", "08/05/2018", "10/08/2018", "Salle à choisir", "5", "1"));
+	sequenceId++;
+	remplirParticipant();
+}
+
+function remplirParticipant(){
+	listeEvt[3].listeParticipant.push('test1@hotmail.fr');
+	listeEvt[3].listeParticipant.push('test2@hotmail.fr');
+	listeEvt[4].listeParticipant.push('test1@hotmail.fr');
+	listeEvt[4].listeParticipant.push('test2@hotmail.fr');
+	listeEvt[0].listeParticipant.push('test3@hotmail.fr');
+	listeEvt[0].listeParticipant.push('test4@hotmail.fr');
+	listeEvt[0].listeParticipant.push('jeanbon@hotmail.fr');
+	listeEvt[0].listeParticipant.push('guilhemquintoch@hotmail.fr');
+	listeEvt[0].listeParticipant.push('yanekcolonge@hotmail.fr');
+	listeEvt[0].listeParticipant.push('alexpausey@hotmail.fr');
+	listeEvt[1].listeParticipant.push('test4@hotmail.fr');
+	listeEvt[1].listeParticipant.push('test3@hotmail.fr');
+	listeEvt[1].listeParticipant.push('guilhemquintoch@hotmail.fr');
+	listeEvt[1].listeParticipant.push('alexpausey@hotmail.fr');
+	listeEvt[2].listeParticipant.push('guilhemquintoch@hotmail.fr');
+	listeEvt[2].listeParticipant.push('alexpausey@hotmail.fr');
 }
