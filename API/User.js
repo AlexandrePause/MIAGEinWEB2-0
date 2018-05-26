@@ -1,6 +1,9 @@
 var listeUser = [];
 
-function User(mail, nom, prenom, tel, idTypePart, idAccompagnant){
+listeUser.push(new User("0", "a@h.fr", "San", "SanDeox", "07", "1", "1"));
+
+function User(id, mail, nom, prenom, tel, idTypePart, idAccompagnant){
+	this.id = id;
 	this.mail = mail;
 	this.nom = nom;
 	this.prenom = prenom;
@@ -12,9 +15,8 @@ function User(mail, nom, prenom, tel, idTypePart, idAccompagnant){
 exports.userExiste = function(mail){
 	var ret = false;
 	listeUser.forEach(function(user, index){
-		
 		if(user.mail === mail)
-			ret = index;
+			ret = user.id;
 	});
 	return ret;
 }

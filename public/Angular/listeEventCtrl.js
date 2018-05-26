@@ -1,4 +1,4 @@
-app.controller('listeEventCtrl', function($scope, $http, $location) {
+app.controller('listeEventCtrl', function($scope, $http, $location, $window) {
 	
 	$scope.modifier = function(id){
 		if(typeof id === 'undefined'){
@@ -18,5 +18,9 @@ app.controller('listeEventCtrl', function($scope, $http, $location) {
     	then(function (response) {
     		$("#listeEvent #"+id).remove();
     	});
+    }
+
+    $scope.retour = function(){
+         $location.path("/");
     }
 });

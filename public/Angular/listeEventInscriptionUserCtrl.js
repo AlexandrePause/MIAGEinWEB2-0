@@ -1,4 +1,7 @@
 app.controller('listeEventInscriptionUserCtrl', function($scope, $http, $location, $cookies) {
+	$scope.retour = function(){
+         $location.path("/");
+    }
 	
     var token = $cookies.get("token");
     

@@ -4,11 +4,17 @@ module.exports = function (app) {
 	app.get('/user/id=:id', function(req, res){
 		
 		//Recupere un user	
+		if(req.params.id === "undefined")
+			res.status(400).send("Veuillez remplir les champs");
+		else{
+			console.log(req.params.id);
 		var user = users.recupUser(req.params.id);
-		if(!user)
+		console.log("UserId == "+user.id);
+		if(user.id === "undefined")
 			res.status(400).send("Le compte n'existe pas");
 		else
-			res.json(user);
+			res.json(user);	
+		}
 	});
 
 	//Creation d'un utilisateur normal

@@ -1,5 +1,9 @@
 app.controller('loginCtrl', function($scope, $http, $location, $cookies) {
 
+	$scope.retour = function(){
+         $location.path("/");
+    }
+
 	$scope.connexion = function(){
    		
    		$http.get("http://localhost:3000/user/id="+$scope.mail)

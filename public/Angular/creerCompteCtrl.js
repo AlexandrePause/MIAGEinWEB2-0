@@ -1,5 +1,9 @@
 app.controller('creerCompteCtrl', function($scope, $http, $location) {
 
+	$scope.retour = function(){
+         $location.path("/");
+    }
+	
 	$http.get("http://localhost:3000/allType")
 	.then(function(response) {
 		$scope.listeType = response.data;
