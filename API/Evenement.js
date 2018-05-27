@@ -5,12 +5,6 @@ var listeEvt = [];
 
 var sequenceId = 0;
 
-listeEvt.push(new Evenement("0", "EVT1", "Evenement 1", "Premier evenemnt", "10/10/2017", "10/11/2017", "Lycée st Pierre", "30", "0"));
-
-listeEvt.push(new Evenement("1", "EVT2", "Evenement 2", "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", "0"));
-
-var sequenceId = 2;
-
 function existe(id){
 	listeEvt.forEach(function(event, index){
 		if(event.id === id)

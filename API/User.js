@@ -67,8 +67,3 @@ exports.getUserAcc = function(mail){
 	});
 	return ret;
 }
-
-this.creerUser("yanekcolonge@hotmail.fr", "Colonge", "Yanek", "06", "0", "-1");
-this.creerUser("jeanbon@hotmail.fr", "Bon", "Jean", "06", "0", "-1");
-this.creerUser("guilhemquintoch@hotmail.fr", "Quintoch", "Guilhem", "06", "0", "-1");
-this.creerUser("alexpausey@hotmail.fr", "Pausey", "Alex", "06", "0", "yanekcolonge@hotmail.fr");

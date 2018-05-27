@@ -2,7 +2,7 @@
 
 	<div class="container">
 		
-		<h1 class="row justify-content-md-left">Vous allez vous inscrire à {{infosEvent.nom}}</h1>
+		<h1 class="row justify-content-md-left">Votre inscription à {{infosEvent.nom}}</h1>
 		<p class="row lead justify-content-md-left">Description de l'événement : {{infosEvent.desc}}</p>
 		<p class="row lead justify-content-md-left">Nombre de participant : {{infosEvent.nbPart}}/{{infosEvent.nbPartMax}}</p>
 		<p class="row lead justify-content-md-left">Lieu de rencontre : {{infosEvent.lieu}}</p>
@@ -18,43 +18,57 @@
 			</div>
 		</div>
 
+		<h2 class="row justify-content-md-left">Vos accompagnants</h2>
+
+		<div ng-bind-html="divAcc"></div>
+
 		
-	</div>
+		<div class="form-group">
+			<div class="container">
+				<div class="row justify-content-md-left">
+					<div class="col-sm-5">
+						<input ng-model="mail" ng-disabled="boutonAccState" class="form-control" placeholder="@mail" type="text" required autocomplete="email">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="container">
+				<div class="row justify-content-md-left">
+					<div class="col-sm-5">
+						<input ng-model="nom" ng-disabled="boutonAccState" class="form-control" placeholder="Nom" type="text" required autocomplete="family-name">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="container">
+				<div class="row justify-content-md-left">
+					<div class="col-sm-5">
+						<input ng-model="prenom" ng-disabled="boutonAccState" class="form-control" placeholder="Prénom" type="text" required autocomplete="name">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="container">
+				<div class="row justify-content-md-left">
+					<div class="col-sm-5">
+						<input ng-model="tel" ng-disabled="boutonAccState" class="form-control" placeholder="téléphone" type="tel" required autocomplete="tel">
+					</div>
+				</div>
+			</div>
+		</div>
 
-	<button ng-click="inscriptionAccomp()">Inscrire des accompagnants </button>
-
-	<div ng-bind-html="divAcc">
-		
-	</div>
-
-	<div class="form-group">
-		<div class="container">
-			<div class="row justify-content-md-left">
-				<input ng-model="mail" ng-change="ajoutChampAcc()" class="form-control" placeholder="@mail" type="text" required autocomplete="email">
+		<div class="form-group">
+			<div class="container">
+				<div class="row justify-content-md-left">
+					<div class="col-sm-3">
+						<button class="btn btn-block" ng-click="inscriptionAccomp()">Inscrire des accompagnants </button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="form-group">
-		<div class="container">
-			<div class="row justify-content-md-left">
-				<input ng-model="nom" class="form-control" placeholder="Nom" type="text" required autocomplete="family-name">
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="container">
-			<div class="row justify-content-md-left">
-				<input ng-model="prenom" class="form-control" placeholder="Prénom" type="text" required autocomplete="name">
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="container">
-			<div class="row justify-content-md-left">
-				<input ng-model="tel" class="form-control" placeholder="téléphone" type="tel" required autocomplete="tel">
-			</div>
-		</div>
-	</div>
-	
 </div>
 

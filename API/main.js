@@ -24,3 +24,29 @@ app.use(function(req, res, next) {
 require('./fonctionUser')(app);
 require('./fonctionEvenement')(app);
 require('./fonctionTypeParticipant')(app);
+
+
+
+
+
+//*** TEST ****//
+
+var typeParticipant = require('./TypeParticipant');
+var evenement = require('./Evenement');
+var users = require('./User');
+
+typeParticipant.creerTypePart("Etudiant", 2);
+
+typeParticipant.creerTypePart("Professeur", 3);
+
+evenement.creerEvt("EVT1", "Evenement 1", "Premier evenemnt", "10/10/2017", "10/11/2017", "Lycée st Pierre", "30", "0");
+
+evenement.creerEvt("EVT2", "Evenement 2", "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", "0");
+
+
+users.creerUser("yanekcolonge@hotmail.fr", "Colonge", "Yanek", "06", "0", "-1");
+users.creerUser("jeanbon@hotmail.fr", "Bon", "Jean", "06", "0", "-1");
+users.creerUser("guilhemquintoch@hotmail.fr", "Quintoch", "Guilhem", "06", "0", "-1");
+users.creerUser("alexpausey@hotmail.fr", "Pausey", "Alex", "06", "0", "yanekcolonge@hotmail.fr");
+
+evenement.ajouterParticipant("0", "alexpausey@hotmail.fr");
