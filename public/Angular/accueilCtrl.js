@@ -1,8 +1,15 @@
-app.controller('accueilCtrl', function($scope,$location, $cookies) {
+app.controller('accueilCtrl', function($scope,$location, $cookies, $http) {
 
 	var token = $cookies.get("token");
 	var connect = false;
-	
+
+	$http.get("http://localhost:3000/allEvenementStats")
+    .then(function (response) {
+    	$scope.listeAllEvt = response.data;
+    	
+    });
+
+
 
 	if($cookies.get("token")===undefined){
 		$scope.connexionStatus = "Connexion";

@@ -67,6 +67,11 @@ module.exports = function (app) {
 		res.send(evenement.getAllEvenement());
 	});
 
+	app.get('/allEvenementStats', function(req, res){
+		res.send(evenement.getAllEvenementStats());
+	});
+	
+
 
 	app.get('/EvenementPossibleUser/id=:id', function(req, res){
 		res.send(evenement.getEvenementPossibleUser(req.params.id));

@@ -95,6 +95,53 @@ exports.getAllEvenement = function(){
 	return listeEvt;
 }
 
+exports.getAllParticipantEvt = function(id){
+	var nbParti = 0;
+
+	listeEvt.forEach(function(event, index){
+		if(event.idTypePart == id){
+			nbParti += event.listeParticipant.length;
+		}
+	});
+	return nbParti;
+}
+
+exports.getAllEvtType = function(id){
+	var nbParti = 0;
+
+	listeEvt.forEach(function(event, index){
+		if(event.idTypePart == id){
+			nbParti ++;
+		}
+	});
+	return nbParti;
+}
+
+exports.getMoyenneParticipant = function(){
+	var tab = [];
+	var self = this;
+
+	var listeTyp = typeParticipant.getAllType();
+	listeTyp.forEach(function(event, index){
+		var nbParti = self.getAllParticipantEvt(event.id);
+		var nbType = self.getAllEvtType(event.id);
+		var nbMoyPartEvt = {nom: event.denom, moyenne: (nbParti/nbType)};
+		tab[event.id] = nbMoyPartEvt;
+	});
+
+	return tab;
+}
+exports.getAllEvenementStats = function(){
+	var listeAllEvt = [];
+	var nbEvt = listeEvt.length;
+	var nbMoyenEvt = this.getMoyenneParticipant();
+	
+	
+	var stats = {NbTotEvt: nbEvt, nbMoy:nbMoyenEvt};
+	listeAllEvt[0] = stats;
+	return listeAllEvt;
+}
+
 exports.eventComplet = function(id){
 	var event = this.recupEvenement(id);
 	var ret = true;
