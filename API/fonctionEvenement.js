@@ -13,10 +13,15 @@ module.exports = function (app) {
 		var lieu = req.body.lieu;
 		var nbPartMax = req.body.nbPartMax;
 		var typePart = req.body.idTypePart;
-
-		
-		if(evenement.creerEvt(acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart))
+		var tab = [];
+		typePart.forEach(function(element, index){
+			if(element != null){
+				tab.push(index.toString());
+			}
+		})
+		if(evenement.creerEvt(acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, tab)){
 			res.status(201).send("Votre evenement a été ajouté.");
+		}
 		else
 			res.status(409).send("L'id existe deja ou le type de participant n'existe pas. Votre evenement n'a pas été ajouté.");
 	});
@@ -27,6 +32,12 @@ module.exports = function (app) {
 		res.json(evenement.recupEvenement(req.params.id));
 		
 	});
+
+	//Raz du type d'evt
+	app.get('/razType/id=:id', function(req, res){
+		res.json(evenement.razTypeEvt(req.params.id));
+	});
+
 
 	//Modifier un evenement
 	app.put('/evenement/id=:id', function(req, res){
@@ -40,7 +51,7 @@ module.exports = function (app) {
 		var lieu = req.body.lieu;
 		var nbPartMax = req.body.nbPartMax;
 		var idTypePart = req.body.idTypePart;
-
+		
 		
 		if(evenement.modifEvenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTypePart))
 			res.status(200).send("Evenement modifié");

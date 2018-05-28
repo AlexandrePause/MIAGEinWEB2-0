@@ -67,9 +67,9 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 	
 
 	$scope.enregistrer = function() {
-
+		var keepGoing = true;
+		var keepGoing2 = true;
 		var idSelect = [];
-		console.log($scope.idTypePart);
 		
 		if($scope.idTypePart.length == 0){
 			idSelect = -1;
@@ -78,13 +78,15 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 			idSelect = $scope.idTypePart;
 		}
 		
+		
+
 		idSelect.forEach(function(element, index){
-			console.log(index);
 						$http.get("http://localhost:3000/typeExist/id="+index)
 						.then(function(response) {
 				       		if(response.data.existe === true){
 				       			
-				       			if(typeof $routeParams.id !== 'undefined'){
+				       			if(typeof $routeParams.id !== 'undefined' && keepGoing){
+				       				var keepGoing2 = false;
 				       				toPost = {
 										"acro" : $scope.acro,
 										"nom" : $scope.nom,
@@ -93,7 +95,7 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 										"datFerm" : $scope.dateFerm,
 										"lieu" : $scope.lieu,
 										"nbPartMax" : $scope.nbPartMax,
-										"idTypePart" : index
+										"idTypePart" : idSelect
 									}
 
 									$http.put("http://localhost:3000/evenement/id="+$routeParams.id, toPost)
@@ -105,25 +107,30 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 									});
 				       			}
 				       			else{
-				       					
-						       		toPost = {
-										"acro" : $scope.acro,
-										"nom" : $scope.nom,
-										"desc" : $scope.desc,
-										"datOuvr" : $scope.dateOuv,
-										"datFerm" : $scope.dateFerm,
-										"lieu" : $scope.lieu,
-										"nbPartMax" : $scope.nbPartMax,
-										"idTypePart" : index
+					       			if(keepGoing)
+					       			{
+					       				keepGoing=false;
+					       						toPost = {
+											"acro" : $scope.acro,
+											"nom" : $scope.nom,
+											"desc" : $scope.desc,
+											"datOuvr" : $scope.dateOuv,
+											"datFerm" : $scope.dateFerm,
+											"lieu" : $scope.lieu,
+											"nbPartMax" : $scope.nbPartMax,
+											"idTypePart" : idSelect
 									}
 
-									$http.post("http://localhost:3000/evenement", toPost)
-									.then(function(res){
-										deleteData();
-										$location.path('/ListeEvent');
-									}, function(res){
-										$scope.error = res.body;
+										$http.post("http://localhost:3000/evenement", toPost)
+										.then(function(res){
+											deleteData();
+											$location.path('/ListeEvent');
+										}, function(res){
+											$scope.error = res.body;
 									});
+									
+				       				}
+						       		
 				       			}
 				       		}
 				       		else{

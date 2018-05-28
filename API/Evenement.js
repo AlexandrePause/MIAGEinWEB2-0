@@ -51,6 +51,20 @@ exports.recupEvenement = function(id) {
 	return ret;
 }
 
+
+exports.razTypeEvt = function(id) {
+	// s'il n'existe pas
+	var ret = false;
+	listeEvt.forEach(function(event, index){
+
+		if(event.id === id){
+			event.idTypePart.length =0;
+			ret = event;
+		}
+	});
+	return ret;
+}
+
 exports.supprEvenement = function(id){
 	var idTab;
 	idTab = this.recupEvenement(id);
@@ -81,14 +95,14 @@ exports.modifEvenement = function(id, acro, nom, desc, datOuvr, datFerm, lieu, n
 		if(typeof nbPartMax !== 'undefined')
 			this.recupEvenement(id).nbPartMax = nbPartMax;
 		if(true){
-			var myThis = this;
-			console.log("salut"+typePart);
-			this.recupEvenement(id).idTypePart.forEach(function(element){
-				if(element.toString() !== typePart.toString()){
-					myThis.recupEvenement(id).idTypePart.push(typePart.toString());
+			var tab = [];
+			typePart.forEach(function(element, index){
+				if(element){
+					tab.push(index.toString());
 				}
-			})
-			console.log(this.recupEvenement(id).idTypePart);
+			});
+
+			this.recupEvenement(id).idTypePart = tab;
 		}
 		return 1;
 	}
