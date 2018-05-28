@@ -3,30 +3,42 @@ var typeParticipant = require('./TypeParticipant');
 
 var listeUser = [];
 
-function User(mail, nom, prenom, tel, idTypePart, idAccompagnant){
+function User(mail, nom, prenom, tel, idTypePart, idAccompagnant, password){
 	this.mail = mail;
 	this.nom = nom;
 	this.prenom = prenom;
 	this.tel = tel;
 	this.idTypePart = idTypePart;
 	this.idAccompagnant = idAccompagnant;
+	this.password= password;
 }
 
 exports.userExiste = function(mail){
 	var ret = false;
+
 	listeUser.forEach(function(user, index){
-		
-		if(user.mail === mail)
+		if(user.mail === mail){
 			ret = index;
+		}
 	});
 	return ret;
 }
 
-exports.creerUser = function(mail, nom, prenom, tel, idTypePart, idAccompagnant){
+exports.getAuth = function(mail, password){
+	var ret = false;
+	listeUser.forEach(function(user, index){
+		if(user.mail === mail && user.password === password)
+			ret = index;
+
+	});
+	return ret;
+}
+
+exports.creerUser = function(mail, nom, prenom, tel, idTypePart, idAccompagnant, password){
 	// s'il n'existe pas
 	if (!this.userExiste(mail)) {
 		// on le cree
-		listeUser.push(new User(mail, nom, prenom, tel, idTypePart, idAccompagnant));
+		listeUser.push(new User(mail, nom, prenom, tel, idTypePart, idAccompagnant, password));
 		return 1;
     }
     return 0;

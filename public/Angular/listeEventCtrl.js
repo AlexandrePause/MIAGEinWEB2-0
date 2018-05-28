@@ -1,4 +1,8 @@
 app.controller('listeEventCtrl', function($scope, $http, $location) {
+
+    $scope.retour = function(){
+         $location.path("/");
+    }
 	
 	$scope.modifier = function(id){
 		if(typeof id === 'undefined'){

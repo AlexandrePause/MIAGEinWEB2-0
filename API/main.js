@@ -40,13 +40,37 @@ typeParticipant.creerTypePart("Etudiant", 2);
 typeParticipant.creerTypePart("Professeur", 3);
 
 evenement.creerEvt("EVT1", "Evenement 1", "Premier evenemnt", "10/10/2017", "10/11/2017", "Lycée st Pierre", "30", "0");
-
 evenement.creerEvt("EVT2", "Evenement 2", "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", "0");
+evenement.creerEvt("EVT3", "Evenement 3", "Troisieme evenemnt", "08/05/2018", "10/07/2018", "Salle Robert Piteu", "10", "0");
+evenement.creerEvt("EVT4", "Evenement 4", "Quatrieme evenemnt", "02/05/2018", "10/08/2018", "Salle à définir", "23", "1");
+evenement.creerEvt("EVT5", "Evenement Magique", "Q evenemnt", "08/05/2018", "10/07/2018", "Salle à choisir", "50", "0");
+evenement.creerEvt("EVT PROF 6", "Apprendre", "S evenemnt", "02/05/2018", "10/07/2018", "Salle à choisir", "2", "1");
+evenement.creerEvt("EVT2 PROF 6", "Comprendre", "Trentieme evenemnt", "02/05/2018", "10/07/2018", "Salle à choisir", "5", "1");
 
 
-users.creerUser("yanekcolonge@hotmail.fr", "Colonge", "Yanek", "06", "0", "-1");
-users.creerUser("jeanbon@hotmail.fr", "Bon", "Jean", "06", "0", "-1");
-users.creerUser("guilhemquintoch@hotmail.fr", "Quintoch", "Guilhem", "06", "0", "-1");
-users.creerUser("alexpausey@hotmail.fr", "Pausey", "Alex", "06", "0", "yanekcolonge@hotmail.fr");
+users.creerUser("pourEmpecherLeFalse", "Colongerrrr", "Yanek", "06", "0", "-1", "user");
+users.creerUser("yanekcolonge@hotmail.fr", "Colonge", "Yanek", "06", "0", "-1", "user");
+users.creerUser("jeanbon@hotmail.fr", "Bon", "Jean", "06", "0", "-1", "user");
+users.creerUser("guilhemquintoch@hotmail.fr", "Quintoch", "Guilhem", "06", "0", "-1", "user");
+users.creerUser("alexpausey@hotmail.fr", "Pausey", "Alex", "06", "0", "yanekcolonge@hotmail.fr", "user");
+users.creerUser("test1@hotmail.fr", "MIAGE", "master", "06", "1", "-1", "user");
+users.creerUser("test2@hotmail.fr", "Marc", "Lavoine", "06", "1", "-1", "user");
+users.creerUser("test3@hotmail.fr", "Colonger", "YaneckLaConlonge", "06", "0", "-1", "user");
+users.creerUser("test4@hotmail.fr", "Lavoine", "Alex", "06", "0", "-1", "user");
+users.creerUser("admin", "Administrateur", "du Service", "06", "A", "-1", "admin");
 
 evenement.ajouterParticipant("0", "alexpausey@hotmail.fr");
+evenement.ajouterParticipant("0", "test3@hotmail.fr");
+evenement.ajouterParticipant("0", "test4@hotmail.fr");
+evenement.ajouterParticipant("0", "jeanbon@hotmail.fr");
+evenement.ajouterParticipant("0", "guilhemquintoch@hotmail.fr");
+evenement.ajouterParticipant("0", "yanekcolonge@hotmail.fr");
+evenement.ajouterParticipant("3", "test2@hotmail.fr");
+evenement.ajouterParticipant("4", "test1@hotmail.fr");
+evenement.ajouterParticipant("4", "test2@hotmail.fr");
+evenement.ajouterParticipant("1", "test4@hotmail.fr");
+evenement.ajouterParticipant("1", "test3@hotmail.fr");
+evenement.ajouterParticipant("1", "guilhemquintoch@hotmail.fr");
+evenement.ajouterParticipant("1", "alexpausey@hotmail.fr");
+evenement.ajouterParticipant("2", "guilhemquintoch@hotmail.fr");
+evenement.ajouterParticipant("2", "alexpausey@hotmail.fr");

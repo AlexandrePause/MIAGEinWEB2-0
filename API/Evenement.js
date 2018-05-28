@@ -5,15 +5,6 @@ var listeEvt = [];
 
 var sequenceId = 0;
 
-function existe(id){
-	listeEvt.forEach(function(event, index){
-		if(event.id === id)
-			return index;
-	});
-	return false;
-}
-
-
 function Evenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTypePart){
 	this.id = id;
 	this.acro = acro;
@@ -91,6 +82,53 @@ exports.getAllEvenement = function(){
 	return listeEvt;
 }
 
+exports.getAllParticipantEvt = function(id){
+	var nbParti = 0;
+
+	listeEvt.forEach(function(event, index){
+		if(event.idTypePart == id){
+			nbParti += event.listeParticipant.length;
+		}
+	});
+	return nbParti;
+}
+
+exports.getAllEvtType = function(id){
+	var nbParti = 0;
+
+	listeEvt.forEach(function(event, index){
+		if(event.idTypePart == id){
+			nbParti ++;
+		}
+	});
+	return nbParti;
+}
+
+exports.getMoyenneParticipant = function(){
+	var tab = [];
+	var self = this;
+
+	var listeTyp = typeParticipant.getAllType();
+	listeTyp.forEach(function(event, index){
+		var nbParti = self.getAllParticipantEvt(event.id);
+		var nbType = self.getAllEvtType(event.id);
+		var nbMoyPartEvt = {nom: event.denom, moyenne: (nbParti/nbType)};
+		tab[event.id] = nbMoyPartEvt;
+	});
+
+	return tab;
+}
+exports.getAllEvenementStats = function(){
+	var listeAllEvt = [];
+	var nbEvt = listeEvt.length;
+	var nbMoyenEvt = this.getMoyenneParticipant();
+	
+	
+	var stats = {NbTotEvt: nbEvt, nbMoy:nbMoyenEvt};
+	listeAllEvt[0] = stats;
+	return listeAllEvt;
+}
+
 exports.eventComplet = function(id){
 	var event = this.recupEvenement(id);
 	var ret = true;
@@ -107,12 +145,18 @@ exports.getEvenementPossibleUser = function(id){
 
 	var user;
 	var tabEvent = [];
+
 	if(user = userData.recupUser(id)){
+
 		var complet = this.eventComplet(id);
 		listeEvt.forEach(function(element){
 			if(element.idTypePart === user.idTypePart){
-				element.complet = complet;
-				tabEvent.push(element);
+				var dateNow = new Date();
+				var date = new Date(element.datFerm);
+				if(dateNow<date){
+					element.complet = complet;
+					tabEvent.push(element);
+				}	
 			}
 		});
 		return tabEvent;
@@ -121,15 +165,31 @@ exports.getEvenementPossibleUser = function(id){
 		return [];
 }
 
+exports.isIncluded = function(listeParticipant, idPart){
+	var bool = false;
+
+	if(listeParticipant[0] === idPart ){
+		bool = true;
+	}
+	else{
+		listeParticipant.forEach(function(element){
+			if(element === idPart){
+				bool = true;
+			}
+	});
+	}
+	return bool;
+}
+
 exports.ajouterParticipant = function(idEvent, idPart){
 	var user;
 	if(user = userData.recupUser(idPart)){
-		console.log(user);
+
 		var event = this.recupEvenement(idEvent);
-		console.log(event);
+
 		if(event.idTypePart === user.idTypePart 
 			&& !this.eventComplet(idEvent)
-			&& !event.listeParticipant.includes(idPart)){
+			&& !this.isIncluded(event.listeParticipant, idPart)){
 			event.listeParticipant.push(idPart);
 			return 1;
 		}
@@ -137,13 +197,39 @@ exports.ajouterParticipant = function(idEvent, idPart){
 	return 0;
 }
 
+
 exports.participe = function (idEvent, idPart){
 	var user;
 	if(user = userData.recupUser(idPart)){
 		var event = this.recupEvenement(idEvent);
-		if(event.listeParticipant.includes(idPart)){
+
+		if(event.nbPart === "0"){
+			return 0;
+		}
+		else{
+			if(this.isIncluded(event.listeParticipant, idPart)){
 			return 1;
+			}
 		}
 	}
 	return 0;
+}
+
+function remplirParticipant(){
+	listeEvt[3].listeParticipant.push('test1@hotmail.fr');
+	listeEvt[3].listeParticipant.push('test2@hotmail.fr');
+	listeEvt[4].listeParticipant.push('test1@hotmail.fr');
+	listeEvt[4].listeParticipant.push('test2@hotmail.fr');
+	listeEvt[0].listeParticipant.push('test3@hotmail.fr');
+	listeEvt[0].listeParticipant.push('test4@hotmail.fr');
+	listeEvt[0].listeParticipant.push('jeanbon@hotmail.fr');
+	listeEvt[0].listeParticipant.push('guilhemquintoch@hotmail.fr');
+	listeEvt[0].listeParticipant.push('yanekcolonge@hotmail.fr');
+	listeEvt[0].listeParticipant.push('alexpausey@hotmail.fr');
+	listeEvt[1].listeParticipant.push('test4@hotmail.fr');
+	listeEvt[1].listeParticipant.push('test3@hotmail.fr');
+	listeEvt[1].listeParticipant.push('guilhemquintoch@hotmail.fr');
+	listeEvt[1].listeParticipant.push('alexpausey@hotmail.fr');
+	listeEvt[2].listeParticipant.push('guilhemquintoch@hotmail.fr');
+	listeEvt[2].listeParticipant.push('alexpausey@hotmail.fr');
 }

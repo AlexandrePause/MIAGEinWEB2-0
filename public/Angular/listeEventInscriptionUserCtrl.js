@@ -1,4 +1,8 @@
 app.controller('listeEventInscriptionUserCtrl', function($scope, $http, $location, $cookies) {
+
+     $scope.retour = function(){
+         $location.path("/");
+    }
 	
     var token = $cookies.get("token");
     
@@ -15,4 +19,9 @@ app.controller('listeEventInscriptionUserCtrl', function($scope, $http, $locatio
     $scope.inscrire = function(id){
     	$location.path('/inscrire').search({id: id});;
     }
+
+    $scope.token = function(){
+         console.log("TOKEN ================" +token);
+    }
+    
 });
