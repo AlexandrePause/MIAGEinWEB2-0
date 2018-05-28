@@ -46,15 +46,16 @@ exports.recupEvenement = function(id) {
 
 exports.supprEvenement = function(id){
 	var idTab;
-
-	if (idTab = existe(id)) 
+	idTab = this.recupEvenement(id);
+	if (idTab === false) 
 		return 0;
 	delete listeEvt[idTab];
 	return 1;
 }
 
 exports.modifEvenement = function(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart){
-	if (existe(id)) 
+	idTab = this.recupEvenement(id);
+	if (idTab === false) 
 		return 0;
 	//Si le type existe on le modifie
 	else{ 
@@ -213,23 +214,4 @@ exports.participe = function (idEvent, idPart){
 		}
 	}
 	return 0;
-}
-
-function remplirParticipant(){
-	listeEvt[3].listeParticipant.push('test1@hotmail.fr');
-	listeEvt[3].listeParticipant.push('test2@hotmail.fr');
-	listeEvt[4].listeParticipant.push('test1@hotmail.fr');
-	listeEvt[4].listeParticipant.push('test2@hotmail.fr');
-	listeEvt[0].listeParticipant.push('test3@hotmail.fr');
-	listeEvt[0].listeParticipant.push('test4@hotmail.fr');
-	listeEvt[0].listeParticipant.push('jeanbon@hotmail.fr');
-	listeEvt[0].listeParticipant.push('guilhemquintoch@hotmail.fr');
-	listeEvt[0].listeParticipant.push('yanekcolonge@hotmail.fr');
-	listeEvt[0].listeParticipant.push('alexpausey@hotmail.fr');
-	listeEvt[1].listeParticipant.push('test4@hotmail.fr');
-	listeEvt[1].listeParticipant.push('test3@hotmail.fr');
-	listeEvt[1].listeParticipant.push('guilhemquintoch@hotmail.fr');
-	listeEvt[1].listeParticipant.push('alexpausey@hotmail.fr');
-	listeEvt[2].listeParticipant.push('guilhemquintoch@hotmail.fr');
-	listeEvt[2].listeParticipant.push('alexpausey@hotmail.fr');
 }

@@ -47,9 +47,6 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 				$scope.lieu = response.data.lieu;
 				$scope.nbPartMax = parseInt(response.data.nbPartMax);
 
-				console.log($scope.listeType);
-				console.log(response.data.idTypePart);
-
 	            $scope.listeType.forEach(function(element){
 	            	if(element.id === response.data.idTypePart)
 	            		$scope.idTypePart = element;

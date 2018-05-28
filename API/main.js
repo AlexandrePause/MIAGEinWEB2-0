@@ -4,6 +4,8 @@ var app = express();
 
 app.use(bodyParser.json());
 
+app.use('/', express.static('public'));
+
 app.listen(3000, function () {
 	console.log('Fonctionne') ;
 });
