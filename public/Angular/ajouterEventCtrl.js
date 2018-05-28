@@ -17,6 +17,7 @@ app.factory('sauvegardeDataEvent', function() {
 
 app.controller('ajouterEventCtrl', function($scope, $http, $location, $routeParams, sauvegardeDataEvent) {
 
+	$scope.idTypePart = [];
 	var data = sauvegardeDataEvent.get();
 
 	$scope.acro = data.acro;
@@ -46,10 +47,17 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 				$scope.dateFerm = response.data.datFerm;
 				$scope.lieu = response.data.lieu;
 				$scope.nbPartMax = parseInt(response.data.nbPartMax);
+				$scope.tabId = [];
+				$scope.tabId = response.data.idTypePart;
 
 	            $scope.listeType.forEach(function(element){
-	            	if(element.id === response.data.idTypePart)
-	            		$scope.idTypePart = element;
+	            	var elem = element;
+	            	$scope.tabId.forEach(function(element){
+	            		if(elem.id === element){
+	            			$scope.idTypePart[element] = true;
+	            		}
+
+	            	})
 	            });
 
 			});
@@ -60,66 +68,74 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 
 	$scope.enregistrer = function() {
 
-		var idSelect;
-
-		if(typeof $scope.idTypePart === 'undefined')
+		var idSelect = [];
+		console.log($scope.idTypePart);
+		
+		if($scope.idTypePart.length == 0){
 			idSelect = -1;
-		else
-			idSelect = $scope.idTypePart.id;
+		}
+		else{
+			idSelect = $scope.idTypePart;
+		}
+		
+		idSelect.forEach(function(element, index){
+			console.log(index);
+						$http.get("http://localhost:3000/typeExist/id="+index)
+						.then(function(response) {
+				       		if(response.data.existe === true){
+				       			
+				       			if(typeof $routeParams.id !== 'undefined'){
+				       				toPost = {
+										"acro" : $scope.acro,
+										"nom" : $scope.nom,
+										"desc" : $scope.desc,
+										"datOuvr" : $scope.dateOuv,
+										"datFerm" : $scope.dateFerm,
+										"lieu" : $scope.lieu,
+										"nbPartMax" : $scope.nbPartMax,
+										"idTypePart" : index
+									}
 
-		$http.get("http://localhost:3000/typeExist/id="+idSelect)
-			.then(function(response) {
-	       		if(response.data.existe === true){
-	       			
-	       			if(typeof $routeParams.id !== 'undefined'){
-	       				toPost = {
-							"acro" : $scope.acro,
-							"nom" : $scope.nom,
-							"desc" : $scope.desc,
-							"datOuvr" : $scope.dateOuv,
-							"datFerm" : $scope.dateFerm,
-							"lieu" : $scope.lieu,
-							"nbPartMax" : $scope.nbPartMax,
-							"idTypePart" : idSelect
-						}
+									$http.put("http://localhost:3000/evenement/id="+$routeParams.id, toPost)
+									.then(function(res){
+										deleteData();
+										$location.path('/ListeEvent');
+									}, function(res){
+										$scope.error = res.body;
+									});
+				       			}
+				       			else{
+				       					
+						       		toPost = {
+										"acro" : $scope.acro,
+										"nom" : $scope.nom,
+										"desc" : $scope.desc,
+										"datOuvr" : $scope.dateOuv,
+										"datFerm" : $scope.dateFerm,
+										"lieu" : $scope.lieu,
+										"nbPartMax" : $scope.nbPartMax,
+										"idTypePart" : index
+									}
 
-						$http.put("http://localhost:3000/evenement/id="+$routeParams.id, toPost)
-						.then(function(res){
-							deleteData();
-							$location.path('/ListeEvent');
-						}, function(res){
-							$scope.error = res.body;
-						});
-	       			}
-	       			else{
-	       					
-			       		toPost = {
-							"acro" : $scope.acro,
-							"nom" : $scope.nom,
-							"desc" : $scope.desc,
-							"datOuvr" : $scope.dateOuv,
-							"datFerm" : $scope.dateFerm,
-							"lieu" : $scope.lieu,
-							"nbPartMax" : $scope.nbPartMax,
-							"idTypePart" : idSelect
-						}
+									$http.post("http://localhost:3000/evenement", toPost)
+									.then(function(res){
+										deleteData();
+										$location.path('/ListeEvent');
+									}, function(res){
+										$scope.error = res.body;
+									});
+				       			}
+				       		}
+				       		else{
+				       			$scope.error = "Le type n'existe pas";
+				       		}
 
-						$http.post("http://localhost:3000/evenement", toPost)
-						.then(function(res){
-							deleteData();
-							$location.path('/ListeEvent');
-						}, function(res){
-							$scope.error = res.body;
-						});
-	       			}
-	       		}
-	       		else{
-	       			$scope.error = "Le type n'existe pas";
-	       		}
+				    }, function(res){
+				    	$scope.error = res.body;
+				    });
+		});
 
-	    }, function(res){
-	    	$scope.error = res.body;
-	    });
+		
     };
 
     $scope.creerTypePart = function(){

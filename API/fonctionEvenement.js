@@ -39,9 +39,10 @@ module.exports = function (app) {
 		var datFerm = req.body.datFerm;
 		var lieu = req.body.lieu;
 		var nbPartMax = req.body.nbPartMax;
-		var typePart = req.body.typePart;
+		var idTypePart = req.body.idTypePart;
+
 		
-		if(evenement.modifEvenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart))
+		if(evenement.modifEvenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTypePart))
 			res.status(200).send("Evenement modifié");
 		else
 			res.status(404).send("Evenement non trouvé");
