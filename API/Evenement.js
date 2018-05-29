@@ -3,7 +3,7 @@ var userData = require('./User');
 
 var listeEvt = [];
 
-var sequenceId = 0;
+var sequenceId = 5;
 
 function Evenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTypePart){
 	this.id = id;
@@ -52,26 +52,32 @@ exports.recupEvenement = function(id) {
 }
 
 
-exports.razTypeEvt = function(id) {
-	// s'il n'existe pas
-	var ret = false;
+
+exports.supprEvenement = function(id){
+	var evt;
+	evt = this.recupEvenement(id);
+	if (evt === false){
+		return 0;
+	}
 	listeEvt.forEach(function(event, index){
 
 		if(event.id === id){
-			event.idTypePart.length =0;
-			ret = event;
+			event.id = undefined;
 		}
 	});
-	return ret;
+	this.majListEvt(id);
+	return 1;
 }
 
-exports.supprEvenement = function(id){
-	var idTab;
-	idTab = this.recupEvenement(id);
-	if (idTab === false) 
-		return 0;
-	delete listeEvt[idTab];
-	return 1;
+exports.majListEvt = function(id){
+	var tab = [];
+	listeEvt.forEach(function(element, index){
+		if(element.id != undefined){
+			tab.push(element);
+		}
+	});
+	listeEvt = [];
+	listeEvt = tab;
 }
 
 exports.modifEvenement = function(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart){

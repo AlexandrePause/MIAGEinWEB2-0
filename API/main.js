@@ -44,15 +44,27 @@ typeParticipant.creerTypePart("Professionnel", 5);
 typeParticipant.creerTypePart("Administratif", 8);
 
 var tab = [];
-tab.push("0");
-tab.push("3");
+tab.push("0");tab.push("1");tab.push("2");tab.push("3");tab.push("4");
 evenement.creerEvt("AL3C2019", "Forum AL3C 2019", "Le forum de l'AL3c est ouvert !", "10/10/2017", "10/11/2017", "UT3 PAUL SABATIER", "15", tab);
-/*evenement.creerEvt("EVT2", "Evenement 2", "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", "0");
-evenement.creerEvt("EVT3", "Evenement 3", "Troisieme evenemnt", "08/05/2018", "10/07/2018", "Salle Robert Piteu", "10", "0");
-evenement.creerEvt("EVT4", "Evenement 4", "Quatrieme evenemnt", "02/05/2018", "10/08/2018", "Salle à définir", "23", "1");
-evenement.creerEvt("EVT5", "Evenement Magique", "Q evenemnt", "08/05/2018", "10/07/2018", "Salle à choisir", "50", "0");
-evenement.creerEvt("EVT PROF 6", "Apprendre", "S evenemnt", "02/05/2018", "10/07/2018", "Salle à choisir", "2", "1");
-evenement.creerEvt("EVT2 PROF 6", "Comprendre", "Trentieme evenemnt", "02/05/2018", "10/07/2018", "Salle à choisir", "5", "1");*/
+tab = [];
+tab.push("0");tab.push("1");tab.push("3");
+evenement.creerEvt("EVT2", "Evenement 2", "Second evenemnt", "02/05/2018", "10/07/2018", "Salle Robert Piteu", "50", tab);
+tab = [];
+tab.push("0");tab.push("3");
+evenement.creerEvt("EVT3", "Evenement 3", "Troisieme evenemnt", "08/05/2018", "10/07/2018", "Salle Robert Piteu", "10", tab);
+tab = [];
+tab.push("2");tab.push("3");
+evenement.creerEvt("EVT4", "Evenement 4", "Quatrieme evenemnt", "02/05/2018", "10/08/2018", "Salle à définir", "23", tab);
+tab = [];
+tab.push("0");tab.push("1");tab.push("3");
+evenement.creerEvt("EVT5", "Evenement Magique", "Q evenemnt", "08/05/2018", "10/07/2018", "Salle à choisir", "50", tab);
+tab = [];
+tab.push("2");
+evenement.creerEvt("EVT PROF 6", "Apprendre", "S evenemnt", "02/05/2018", "10/07/2018", "Salle à choisir", "2", tab);
+tab = [];
+tab.push("2");
+evenement.creerEvt("EVT2 PROF 6", "Comprendre", "Trentieme evenemnt", "02/05/2018", "10/07/2018", "Salle à choisir", "5", tab);
+tab = [];
 
 
 users.creerUser("pourEmpecherLeFalse", "Colongerrrr", "Yanek", "06", "0", "-1", "user");

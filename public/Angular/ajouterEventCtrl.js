@@ -16,8 +16,13 @@ app.factory('sauvegardeDataEvent', function() {
 
 
 app.controller('ajouterEventCtrl', function($scope, $http, $location, $routeParams, sauvegardeDataEvent) {
-
-	$scope.idTypePart = [];
+	if($scope.acro == "" || $scope.nom == "" || $scope.dateOuv == "" || $scope.dateFin == "" || $scope.nbPartMax == ""){
+		$scope.error = "Remplir tout les champs svp";
+		var stop = true;
+	}
+	else{
+		var stop = false;
+		$scope.idTypePart = [];
 	var data = sauvegardeDataEvent.get();
 
 	$scope.acro = data.acro;
@@ -63,11 +68,14 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 			});
 		}
 	});
+	}
+	
 
 	
 
 	$scope.enregistrer = function() {
-		var keepGoing = true;
+		if($scope.acro != "" && $scope.nom != "" && $scope.dateOuv != "" && $scope.dateFin != "" && $scope.nbPartMax != ""){
+			var keepGoing = true;
 		var keepGoing2 = true;
 		var idSelect = [];
 		
@@ -143,7 +151,10 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 		});
 
 		
-    };
+
+		}
+		    };
+		
 
     $scope.creerTypePart = function(){
     	saveData();
