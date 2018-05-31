@@ -22,7 +22,7 @@
   				<td>{{ x.lieu }}</td>
   				<td>{{ x.datOuvr }}</td>
   				<td>{{ x.datFerm }}</td>
-          <td> {{x.nbPart}}/{{x.nbPartMax}} </td>
+          <td> {{x.listeParticipant.length}}/{{x.nbPartMax}} </td>
   				<td>
   					<button class="btn" ng-click="modifier(x.id)" >Modifier</button>
   					<button class="btn" ng-click="supprimer(x.id)">Supprimer</button>

@@ -68,12 +68,12 @@ tab = [];
 
 
 users.creerUser("pourEmpecherLeFalse", "Colongerrrr", "Yanek", "06", "0", "-1", "user");
-users.creerUser("yanekcolonge@hotmail.fr", "Colonge", "Yanek", "06", "0", "-1", "user");
-users.creerUser("jeanbon@hotmail.fr", "Bon", "Jean", "06", "0", "-1", "user");
+users.creerUser("yanekcolonge@hotmail.fr", "Colonge", "Yanek", "06", "1", "-1", "user");
+users.creerUser("jeanbon@hotmail.fr", "Bon", "Jean", "06", "2", "-1", "user");
 users.creerUser("guilhemquintoch@hotmail.fr", "Quintoch", "Guilhem", "06", "0", "-1", "user");
-users.creerUser("alexpausey@hotmail.fr", "Pausey", "Alex", "06", "0", "yanekcolonge@hotmail.fr", "user");
-users.creerUser("test1@hotmail.fr", "MIAGE", "master", "06", "1", "-1", "user");
-users.creerUser("test2@hotmail.fr", "Marc", "Lavoine", "06", "1", "-1", "user");
+users.creerUser("alexpausey@hotmail.fr", "Pausey", "Alex", "06", "3", "yanekcolonge@hotmail.fr", "user");
+users.creerUser("test1@hotmail.fr", "MIAGE", "master", "06", "2", "-1", "user");
+users.creerUser("test2@hotmail.fr", "Marc", "Lavoine", "06", "2", "-1", "user");
 users.creerUser("test3@hotmail.fr", "Colonger", "YaneckLaConlonge", "06", "0", "-1", "user");
 users.creerUser("test4@hotmail.fr", "Lavoine", "Alex", "06", "0", "-1", "user");
 users.creerUser("admin", "Administrateur", "du Service", "06", "A", "-1", "admin");
@@ -93,3 +93,6 @@ evenement.ajouterParticipant("1", "guilhemquintoch@hotmail.fr");
 evenement.ajouterParticipant("1", "alexpausey@hotmail.fr");
 evenement.ajouterParticipant("2", "guilhemquintoch@hotmail.fr");
 evenement.ajouterParticipant("2", "alexpausey@hotmail.fr");
+evenement.ajouterParticipant("5", "test2@hotmail.fr");
+evenement.ajouterParticipant("5", "test1@hotmail.fr");
+evenement.ajouterParticipant("6", "test1@hotmail.fr");

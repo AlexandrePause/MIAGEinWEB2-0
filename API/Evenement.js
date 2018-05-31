@@ -3,7 +3,7 @@ var userData = require('./User');
 
 var listeEvt = [];
 
-var sequenceId = 5;
+var sequenceId = 0;
 
 function Evenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTypePart){
 	this.id = id;
@@ -16,7 +16,6 @@ function Evenement(id, acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, idTyp
 	this.nbPartMax = nbPartMax;
 	this.idTypePart = idTypePart;
 	this.listeParticipant = [];
-	this.nbPart = this.listeParticipant.length;
 }
 
 exports.creerEvt = function(acro, nom, desc, datOuvr, datFerm, lieu, nbPartMax, typePart){
@@ -120,16 +119,59 @@ exports.getAllEvenement = function(){
 
 exports.getAllParticipantEvt = function(id){
 	var nbParti = 0;
-
-	listeEvt.forEach(function(event, index){
-		if(event.idTypePart == id){
-			nbParti += event.listeParticipant.length;
+	listeEvt.forEach(function(event){
+		if(event.id === id){
+			nbParti = event.listeParticipant.length;
 		}
-	});
+	})
 	return nbParti;
 }
 
-exports.getAllEvtType = function(id){
+exports.getPourcEvtType = function(id, nbParti){
+	var tab = [];
+	var event = this.recupEvenement(id);
+	var nbPart = 0;
+	event.idTypePart.forEach(function(monIdTypePart){
+		var nomType = typeParticipant.recupTypePart(monIdTypePart);
+		nbPart = 0;
+		event.listeParticipant.forEach(function(element){
+			var participant = userData.recupUser(element);
+			if(monIdTypePart === participant.idTypePart){
+				nbPart++;
+			}
+		});
+		if(nbPart != 0){
+			var monPourcentage = (nbPart*100)/nbParti;
+			tab.push({type: nomType, pourcentage : monPourcentage});
+		}
+	});
+	return tab;
+}
+
+exports.getMoyenneParticipantTypeP = function(){
+	var tab = [];
+	var myThis = this;
+
+	var listeTyp = typeParticipant.getAllType();
+	listeEvt.forEach(function(event, index){
+		var nbParti = myThis.getAllParticipantEvt(event.id);
+		var monPourcentage = myThis.getPourcEvtType(event.id, nbParti);
+		var nbMoyPartEvt = {nom: event.acro, nbPartiEvt : nbParti, pourcent : monPourcentage};
+		tab.push(nbMoyPartEvt);
+	});
+
+	return tab;
+}
+
+exports.getAllParticipant = function(){
+	var nb = 0;
+	listeEvt.forEach(function(event, index){
+		nb+=event.listeParticipant.length;
+	});
+	return nb;
+}
+
+exports.getAllEvt = function(id){
 	var nbParti = 0;
 
 	listeEvt.forEach(function(event, index){
@@ -142,25 +184,25 @@ exports.getAllEvtType = function(id){
 
 exports.getMoyenneParticipant = function(){
 	var tab = [];
-	var self = this;
+	var myThis = this;
+	var nbPartiTot = this.getAllParticipant();
 
-	var listeTyp = typeParticipant.getAllType();
-	listeTyp.forEach(function(event, index){
-		var nbParti = self.getAllParticipantEvt(event.id);
-		var nbType = self.getAllEvtType(event.id);
-		var nbMoyPartEvt = {nom: event.denom, moyenne: (nbParti/nbType)};
-		tab[event.id] = nbMoyPartEvt;
+	listeEvt.forEach(function(event, index){
+		var nbParti = event.listeParticipant.length;
+		var nbMoyPartEvt = {nom: event.acro, moyenne: (nbParti/nbPartiTot)};
+		tab.push(nbMoyPartEvt);
 	});
 
 	return tab;
 }
+
 exports.getAllEvenementStats = function(){
 	var listeAllEvt = [];
 	var nbEvt = listeEvt.length;
 	var nbMoyenEvt = this.getMoyenneParticipant();
+	var nbMoyenParType = this.getMoyenneParticipantTypeP();
 	
-	
-	var stats = {NbTotEvt: nbEvt, nbMoy:nbMoyenEvt};
+	var stats = {NbTotEvt: nbEvt, nbMoyPartEvt:nbMoyenEvt, nbMoyPartTypeEvt:nbMoyenParType};
 	listeAllEvt[0] = stats;
 	return listeAllEvt;
 }
@@ -219,16 +261,15 @@ exports.isIncluded = function(listeParticipant, idPart){
 
 exports.ajouterParticipant = function(idEvent, idPart){
 	var user;
+	var myThis = this;
 	if(user = userData.recupUser(idPart)){
-
 		var event = this.recupEvenement(idEvent);
-
-		if(event.idTypePart === user.idTypePart 
-			&& !this.eventComplet(idEvent)
-			&& !this.isIncluded(event.listeParticipant, idPart)){
-			event.listeParticipant.push(idPart);
+		event.idTypePart.forEach(function(element){
+			if(element === user.idTypePart && !myThis.eventComplet(idEvent) && !myThis.isIncluded(event.listeParticipant, idPart)){
+				event.listeParticipant.push(idPart);
 			return 1;
-		}
+			}
+		})
 	}
 	return 0;
 }
@@ -239,7 +280,7 @@ exports.participe = function (idEvent, idPart){
 	if(user = userData.recupUser(idPart)){
 		var event = this.recupEvenement(idEvent);
 
-		if(event.nbPart === "0"){
+		if(event.listeParticipant.length == 0){
 			return 0;
 		}
 		else{
