@@ -53,6 +53,19 @@ exports.recupUser = function(mail) {
 	return {};
 }
 
+exports.recupTouteInfosUser = function(mail) {
+	var idTab;
+	var user  = {};
+	idTab = this.userExiste(mail);
+	if (idTab !== false){
+		user = listeUser[idTab];
+		user.idTypePartLib = typeParticipant.recupTypePart(user.idTypePart).denom;
+		user.listeAcc = this.getUserAcc(mail);
+
+	}
+	return user;
+}
+
 exports.supprUser = function(id){;
 	var idTab = this.userExiste(id);
 	if (!idTab) 

@@ -11,6 +11,16 @@ module.exports = function (app) {
 			res.json(user);
 	});
 
+	app.get('/user/id=:id', function(req, res){
+		//Est-ce le bon log mdp ?
+		var user = users.recupTouteInfosUser(req.params.id);
+		if(!user){
+			res.status(400).send("Le compte n'existe pas");
+		}
+		else
+			res.json(user);
+	});
+
 
 	//Creation d'un utilisateur normal
 	app.post('/addUser', function(req, res){

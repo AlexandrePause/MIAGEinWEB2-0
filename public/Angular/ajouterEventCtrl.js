@@ -164,6 +164,11 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 		}
 	};
 
+	$scope.plusInfo = function(mail){
+		saveData();
+		$location.path("infoUser").search({"idUser" : mail, "idEvent" : $routeParams.id});
+	}
+
 
 	$scope.creerTypePart = function(){
 		saveData();

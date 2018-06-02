@@ -1,0 +1,35 @@
+<div ng-controller="infoUserCtrl">
+
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">Information sur l'user</h5>
+			<p>E-mail : {{infoUser.mail}}</p>
+			<p>Nom : {{infoUser.nom}}</p>
+			<p>Prénom : {{infoUser.prenom}}</p>
+			<p>Téléphone : {{infoUser.tel}}</p>
+			<p>Type de participant : {{infoUser.idTypePartLib}}</p>
+			<h6>Liste de accompagnants : </h6>
+			<table class="table">
+				<th>E-mail</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<tr ng-repeat="(key, value) in infoUser.listeAcc">
+					<td>{{value.mail}}</td>
+					<td>{{value.nom}}</td>
+					<td>{{value.prenom}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-sm-3">
+		          <button class="btn btn-block btn-warning" ng-click="retour()">Retour</button>
+		        </div>
+			</div>
+		</div>
+	</div>
+
+</div>

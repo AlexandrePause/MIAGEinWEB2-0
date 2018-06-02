@@ -32,6 +32,9 @@ app.config(function($routeProvider) {
 	.when("/inscrire", {
 		templateUrl : "Inscrire.html"
 	})
+	.when("/infoUser", {
+		templateUrl : "infoUser.html"
+	})
 	.otherwise({
 	    template : "<h1>None</h1><p>Nothing has been selected</p>"
   });
