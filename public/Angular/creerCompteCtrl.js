@@ -10,13 +10,15 @@ app.controller('creerCompteCtrl', function($scope, $http, $location) {
 	});
 
 	$scope.enregistrer = function(){
+		
    		var toPost = {
 			"mail": $scope.mail,
 			"mdp": $scope.password,
 		    "nom": $scope.nom,
 		    "prenom": $scope.prenom,
 		    "tel": $scope.tel,
-		    "idTypePart": $scope.idTypePart.id
+		    "idTypePart": $scope.idTypePart.id,
+		    "option": $scope.option
 		};
 		
 		if($scope.formCreerCompte.$valid){

@@ -220,6 +220,7 @@ exports.getAllEvenementStats = function(){
 }
 
 exports.eventComplet = function(id){
+
 	var event = this.recupEvenement(id);
 	var ret = true;
 	if(event){
@@ -235,11 +236,8 @@ exports.getEvenementPossibleUser = function(id){
 
 	var user;
 	var tabEvent = [];
-
 	if(user = userData.recupUser(id)){
-
-		var complet = this.eventComplet(id);
-		listeEvt.forEach(function(element){
+		listeEvt.forEach(function(element){Z
 			element.idTypePart.some(function(idTypePartEvent){
 				if(idTypePartEvent === user.idTypePart){
 					var dateNow = new Date();
@@ -251,8 +249,8 @@ exports.getEvenementPossibleUser = function(id){
 					}	
 				}
 			});
-			
 		});
+
 		return tabEvent;
 	}
 	else
@@ -279,6 +277,7 @@ exports.ajouterParticipant = function(idEvent, idPart){
 	var ret = 0;
 	var user;
 	var myThis = this;
+	var value = false;
 	if(user = userData.recupUser(idPart)){
 		var event = this.recupEvenement(idEvent);
 		event.idTypePart.forEach(function(element){

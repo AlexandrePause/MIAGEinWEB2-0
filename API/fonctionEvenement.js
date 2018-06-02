@@ -103,9 +103,9 @@ module.exports = function (app) {
 		var idUser = req.body.idUser;
 		var idEvent = req.body.idEvent;
 		var reussi = evenement.ajouterParticipant(idEvent, idUser);
-		console.log(reussi);
-		if(reussi)
+		if(reussi){
 			res.status(200).send();
+		}
 		else
 			res.status(400).send();
 	});

@@ -34,11 +34,11 @@ exports.getAuth = function(mail, password){
 	return ret;
 }
 
-exports.creerUser = function(mail, nom, prenom, tel, idTypePart, idAccompagnant, password){
+exports.creerUser = function(mail, nom, prenom, tel, idTypePart, idAccompagnant, password, option){
 	// s'il n'existe pas
 	if (!this.userExiste(mail)) {
 		// on le cree
-		listeUser.push(new User(mail, nom, prenom, tel, idTypePart, idAccompagnant, password));
+		listeUser.push(new User(mail, nom, prenom, tel, idTypePart, idAccompagnant, password, option));
 		return 1;
     }
     return 0;
