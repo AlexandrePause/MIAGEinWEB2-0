@@ -114,4 +114,22 @@
   		</div>
   	</div>
 	
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Participants à l'évènement</h5>
+      <table class="table">
+        <th>e-mail</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Plus d'infos</th>
+        <tr ng-repeat="(key, value) in listePart">
+          <td>{{value.mail}}</td>
+          <td>{{value.nom}}</td>
+          <td>{{value.prenom}}</td>
+          <td><button class="btn">+</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
 </form>

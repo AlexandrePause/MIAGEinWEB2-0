@@ -104,4 +104,8 @@ module.exports = function (app) {
 		res.send(evenement.participe(req.params.idEvent,req.params.idUser).toString());
 
 	});
+
+	app.get('/getParticipantEvt/id=:id', function(req, res){
+		res.json(evenement.getParticipantEvt(req.params.id));
+	});
 };

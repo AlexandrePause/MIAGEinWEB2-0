@@ -117,6 +117,18 @@ exports.getAllEvenement = function(){
 	return listeEvt;
 }
 
+exports.getParticipantEvt = function(id){
+	var evt = this.recupEvenement(id);
+	var ret = [];
+	if(evt !== false){
+
+		evt.listeParticipant.forEach(function(idPart){
+			ret.push(userData.recupUser(idPart));
+		});
+	}
+	return ret;
+}
+
 exports.getAllParticipantEvt = function(id){
 	var nbParti = 0;
 	listeEvt.forEach(function(event){
