@@ -75,10 +75,10 @@ module.exports = function (app) {
 		
 		//Recupere un user	
 		var user = users.peutAjouterAcc(req.params.id);
-		if(!user)
-			res.status(200).send("false");
+		if(!user.peutAjouter)
+			res.status(200).send(user);
 		else
-			res.status(200).send("true");
+			res.status(200).send(user);
 	});
 };
 

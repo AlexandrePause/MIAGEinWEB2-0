@@ -45,7 +45,6 @@ exports.creerUser = function(mail, nom, prenom, tel, idTypePart, idAccompagnant,
 }
 
 exports.recupUser = function(mail) {
-	// s'il n'existe pas
 	var idTab;
 	idTab = this.userExiste(mail);
 	if (idTab !== false){
@@ -55,19 +54,23 @@ exports.recupUser = function(mail) {
 }
 
 exports.supprUser = function(id){;
-	var idTab;
-	if (this.userExiste(id)) 
+	var idTab = this.userExiste(id);
+	if (!idTab) 
 		return 0;
-	delete listeUser[idTab];
+	listeUser.splice(idTab, 1);
 	return 1;
 }
 
 exports.peutAjouterAcc = function(id){
+	var ret ={};
+	ret["peutAjouter"] = false;
 	var user = this.recupUser(id);
 	var typeCompte = typeParticipant.recupTypePart(user.idTypePart);
-	if(typeCompte.maxAcc > this.getUserAcc(id).length)
-		return true;
-	return false;
+	if(typeCompte.maxAcc > this.getUserAcc(id).length){
+		ret["peutAjouter"] = true;
+	}
+	ret["idTypePart"] = user.idTypePart;
+	return ret;
 }
 
 exports.getUserAcc = function(mail){

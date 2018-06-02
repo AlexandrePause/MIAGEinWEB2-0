@@ -17,15 +17,22 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
         });
         $http.get("http://localhost:3000/peutAjouterAccomp/id="+token)
         .then(function (response) {
-            $scope.boutonAccState = response.data;
+            $scope.boutonAccState = !response.data.peutAjouter;
+            $scope.idTypePartUser = response.data.idTypePart;
         });
         $http.get("http://localhost:3000/userAccomp/id="+token)
         .then(function (response) {
             //Retourne les accompagnants
+            $scope.tabAcc = [];
             var stringAcc = "";
 
             response.data.forEach(function(elem){
-                stringAcc += "<p>"+elem.mail+" "+elem.nom+" "+elem.prenom+" "+elem.tel+"<p>";
+                $scope.tabAcc.push({
+                    "mail" : elem.mail,
+                    "nom" : elem.nom,
+                    "prenom" : elem.prenom,
+                    "tel" : elem.tel
+                });
             });
 
             $scope.divAcc = stringAcc;
@@ -43,7 +50,7 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
     .then(function (response) {
     	if(response.data === "0"){
             $scope.sinscriretxt = "S'inscrire";
-            $scope.buttonInsc = false;  
+            $scope.buttonInsc = false;
         }
     	else{
             $scope.sinscriretxt  = "Vous êtes déjà inscrit";
@@ -51,7 +58,15 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
         }
     });
 
-
+    $scope.supprAcc = function(id){
+        $http.delete("http://localhost:3000/user/id="+$scope.tabAcc[id].mail)
+        .then(function(res){
+            $scope.tabAcc.splice(id, 1);
+            updateInfo();
+        }, function(res){
+            alert("Erreur lors de la suppressiont"+res.data);
+        });
+    }
 
     $scope.inscription = function(){
     	toPost = {
@@ -76,7 +91,7 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
 		    "nom": $scope.nom,
 		    "prenom": $scope.prenom,
 		    "tel": $scope.tel,
-		    "idTypePart" : $scope.infosEvent.idTypePart,
+		    "idTypePart" : $scope.idTypePartUser,
 		    "idAccompagnant" : token
 		};
 
