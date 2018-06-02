@@ -122,11 +122,13 @@
         <th>Nom</th>
         <th>Prénom</th>
         <th>Plus d'infos</th>
+        <th>Supprimer le participant</th>
         <tr ng-repeat="(key, value) in listePart">
           <td>{{value.mail}}</td>
           <td>{{value.nom}}</td>
           <td>{{value.prenom}}</td>
           <td><button class="btn" ng-click="plusInfo(value.mail)">+</button></td>
+          <td><button class="btn" ng-click="deletePart(value.mail)">🗑</button></td>
         </tr>
       </table>
     </div>

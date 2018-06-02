@@ -164,6 +164,16 @@ app.controller('ajouterEventCtrl', function($scope, $http, $location, $routePara
 		}
 	};
 
+	$scope.deletePart = function(mail){
+		$http.delete("http://localhost:3000/evenementPart/idEvent="+$routeParams.id+"&idPart="+mail)
+		.then(function(){
+			$http.get("http://localhost:3000/getParticipantEvt/id="+$routeParams.id)
+			.then(function(response) {
+				$scope.listePart = response.data;
+			});
+		})
+	}
+
 	$scope.plusInfo = function(mail){
 		saveData();
 		$location.path("infoUser").search({"idUser" : mail, "idEvent" : $routeParams.id});

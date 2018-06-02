@@ -68,6 +68,16 @@ module.exports = function (app) {
 			res.status(404).send("Evenement non trouvé");
 	});
 
+	app.delete('/evenementPart/idEvent=:idEvent&idPart=:idPart', function(req,res){
+
+		var idEvent = req.params.idEvent;
+		var idPart = req.params.idPart;
+		if(evenement.supprimerParticipant(idEvent,idPart))
+			res.status(200).send("Evenement supprimer");
+		else
+			res.status(404).send("Evenement non trouvé");
+	});
+
 	//Recupere le dernier id ajouté pour les evenements
 	app.get('/lastIdEvent', function(req, res){
 		

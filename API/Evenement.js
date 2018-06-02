@@ -292,6 +292,23 @@ exports.ajouterParticipant = function(idEvent, idPart){
 }
 
 
+exports.supprimerParticipant = function(idEvent, idPart){
+	var ret = 0;
+	var index = -1;
+	var event = this.recupEvenement(idEvent);
+
+	event.listeParticipant.forEach(function(idP, i){
+		if(idPart === idP){
+			index = i;
+			ret = 1;
+		}
+	});
+	if(index !== -1)
+		event.listeParticipant.splice(index, 1);
+	return ret;
+}
+
+
 exports.participe = function (idEvent, idPart){
 	var user;
 	if(user = userData.recupUser(idPart)){
