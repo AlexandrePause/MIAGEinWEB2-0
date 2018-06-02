@@ -208,6 +208,7 @@ exports.getAllEvenementStats = function(){
 }
 
 exports.eventComplet = function(id){
+
 	var event = this.recupEvenement(id);
 	var ret = true;
 	if(event){
@@ -223,20 +224,19 @@ exports.getEvenementPossibleUser = function(id){
 
 	var user;
 	var tabEvent = [];
-
 	if(user = userData.recupUser(id)){
-
-		var complet = this.eventComplet(id);
 		listeEvt.forEach(function(element){
-			if(element.idTypePart === user.idTypePart){
-				var dateNow = new Date();
-				var date = new Date(element.datFerm);
-				if(dateNow<date){
-					element.complet = complet;
-					tabEvent.push(element);
-				}	
-			}
+			element.idTypePart.forEach(function(idT){
+					if(user.idTypePart === idT){
+						var dateNow = new Date();
+						var date = new Date(element.datFerm);
+						if(dateNow<date){
+							tabEvent.push(element);
+						}	
+					}
+				});
 		});
+
 		return tabEvent;
 	}
 	else
@@ -262,16 +262,17 @@ exports.isIncluded = function(listeParticipant, idPart){
 exports.ajouterParticipant = function(idEvent, idPart){
 	var user;
 	var myThis = this;
+	var value = false;
 	if(user = userData.recupUser(idPart)){
 		var event = this.recupEvenement(idEvent);
 		event.idTypePart.forEach(function(element){
 			if(element === user.idTypePart && !myThis.eventComplet(idEvent) && !myThis.isIncluded(event.listeParticipant, idPart)){
 				event.listeParticipant.push(idPart);
-			return 1;
+				value = true;
 			}
 		})
 	}
-	return 0;
+	return value;
 }
 
 

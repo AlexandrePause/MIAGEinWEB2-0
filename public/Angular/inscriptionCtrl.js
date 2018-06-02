@@ -61,6 +61,7 @@ app.controller('inscriptionCtrl', function($scope, $http, $location, $cookies, $
 
     	$http.post("http://localhost:3000/inscriptionUser", toPost)
 	    .then(function (response) {
+            console.log("hello");
 	        $scope.buttonInsc = true;
 	        updateInfo();
             $scope.sinscriretxt  = "Inscription prise en compte";

@@ -22,10 +22,11 @@
   				<td>{{ x.lieu }}</td>
   				<td>{{ x.datOuvr }}</td>
   				<td>{{ x.datFerm }}</td>
-          <td>{{x.nbPart}}/{{x.nbPartMax}}</td>
+          <td>{{x.listeParticipant.length}}/{{x.nbPartMax}}</td>
   				<td>
-            <button ng-if="x.nbPart < x.nbPartMax || !x.nbPart" class="btn" ng-click="inscrire(x.id)" >S'inscrire</button>
-            <text ng-if="x.nbPartMax == x.nbPart">Complet</text>
+            <button ng-if="x.nbPart < x.nbPartMax || !x.nbPart" class="btn" ng-click="inscrire(x.id)" >Voir</button>
+           <b> <text ng-if="x.nbPartMax == x.nbPart">Complet</text></b>
+           <i> <text ng-repeat="y in x.listeParticipant" ng-if="y == tokenToTest"><br>Vous êtes inscrit</text></i>
   				</td>
   			</tr>
   		</tbody>
