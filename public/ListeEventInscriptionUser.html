@@ -1,18 +1,18 @@
 <div class="container">
-	<h1 class="row justify-content-md-center">S'inscrire à un évènement</h1>
+	<h1 class="row justify-content-md-center">{{"sinscrireEvent" | translate}}</h1>
 </div>
 <div ng-controller="listeEventInscriptionUserCtrl">
 	<div class="container">
   	<table class="table table-bordered" id="listeEvent">
   		<thead>
   			<tr>
-  				<th>Acronyme</th>
-  				<th>Nom</th>
-  				<th>Lieu</th>
-  				<th>Ouverture inscription</th>
-  				<th>Fermeture inscription</th>
-          <th>Nombre de places</th>
-  				<th>Actions</th>
+  				<th>{{"acronyme" | translate}}</th>
+          <th>{{"nom" | translate}}</th>
+          <th>{{"lieu" | translate}}</th>
+          <th>{{"dateDeb" | translate}}</th>
+          <th>{{"dateFin" | translate}}</th>
+          <th>{{"nbPartActu" | translate}}</th>
+          <th>Action</th>
   			</tr>
   		</thead>
   		<tbody>
@@ -32,7 +32,7 @@
   		</tbody>
   	</table>
     <div class="col-sm-3">
-            <button type="button" class="btn btn-block  btn-warning" ng-click="retour()">Retour</button>
+            <button type="button" class="btn btn-block  btn-warning" ng-click="retour()">{{"retour" | translate}}</button>
     </div>
 	</div>
 </div>

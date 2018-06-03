@@ -6,6 +6,8 @@ app.use(bodyParser.json());
 
 app.use('/', express.static('public'));
 
+app.use('/bower_components', express.static('bower_components'));
+
 app.listen(3000, function () {
 	console.log('Fonctionne') ;
 });

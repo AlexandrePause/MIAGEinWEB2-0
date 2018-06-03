@@ -1,0 +1,54 @@
+
+
+{
+	"listeDesEvenements" : "Event Manager",
+	"enToutlstEventPart1" :  "There is",
+	"enToutlstEventPart2" : " event in the app.",
+	"nomDeLevent" : "Name of the event",
+	"moyennePart" : "Average of participant 	",
+	"part" : "participant(s).",
+	"typePartPossible" : "Possible type of participation : ",	
+	"partAlEvent" : "Participants to the event",
+	"listeAccomp" : "Inscription type",
+	"typeInscription" : "Companion list",
+	"votreInscrA" : "Votre inscription à ",
+	"descDeLevent" : "Description de l'événement",
+	"nbPart" : "Nombre de participants",
+	"lieuDeRenc" : "Lieu de rencontre",
+	"dateDeb" : "Date de début",
+	"dateFin" : "Date de fin",
+	"ajouterAcc" : "Ajouter un accompagnant",
+	"inscAcc" : "Inscrire l'accompagnant",
+	"ajoutEvent" : "Ajouter un Evènement",
+	"typePart" : "Type d'inscription",
+
+	"email" : "E-mail",
+	"nom" : "Nom",
+	"prenom" : "Prénom",
+	"tel" : "Téléphone",
+	"plusInfo" : "Plus d'infos",
+	"supprPart" : "Supprimer le participant",
+
+	"acronyme" : "Acronyme",
+	"lieu" : "Lieu",
+	"nbPartActu" : "Nombre de participants actuel",
+
+	"sinscrire" : "S'inscrire",
+	"annuler" : "Annuler",
+	"enregistrer" : "Enregistrer",
+	"retour" : "Retour",
+	"supprimer" : "Supprimer",
+	"modifier" : "Modifier",
+	"SeConnecter" : "Se connecter",
+
+	"creerType" : "Créer un type",
+	"ajoutEvent" : "Ajouter un évènement",
+	"accueil.titre" : "Gestionnaire d'évènements",
+	"administration" : "Administration",
+	"creerCompte" : "Créer un compte",
+	"lstEvent" : "Liste des évènements",
+	"sinscrireEvent" : "S'inscrire à un évènement",
+
+
+	"directives.language-select.Language" : "Language"
+}

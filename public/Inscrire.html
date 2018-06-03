@@ -4,17 +4,17 @@
 		
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Votre inscription à {{infosEvent.nom}}</h4>
-				<p>Description de l'événement : {{infosEvent.desc}}</p>
-				<p>Nombre de participant : {{infosEvent.nbPart}}/{{infosEvent.nbPartMax}}</p>
-				<p>Lieu de rencontre : {{infosEvent.lieu}}</p>
-				<p>Date de début : {{infosEvent.datOuvr}} / Date de fin : {{infosEvent.datFerm}}</p>
+				<h4 class="card-title">{{"votreInscrA" | translate}}{{infosEvent.nom}}</h4>
+				<p>{{"descDeLevent" | translate}} : {{infosEvent.desc}}</p>
+				<p>{{"nbPart" | translate}} : {{infosEvent.nbPart}}/{{infosEvent.nbPartMax}}</p>
+				<p>{{"lieuDeRenc" | translate}} : {{infosEvent.lieu}}</p>
+				<p>{{"dateDeb" | translate}} : {{infosEvent.datOuvr}} / {{"dateFin" | translate}} : {{infosEvent.datFerm}}</p>
 			</div>
 			<div class="form-group">
 				<div class="container">
 					<div class="row justify-content-md-left">
 						<div class="col-sm-3">
-							<button type="button" class="btn btn-block  btn-warning" ng-click="retour()">Retour</button>
+							<button type="button" class="btn btn-block  btn-warning" ng-click="retour()">{{"retour" | translate}}</button>
 						</div>
 						<div class="col-sm-3">
 							<button ng-disabled="buttonInsc" ng-click="inscription()" class="btn btn-block">{{ sinscriretxt }}</button>
@@ -28,10 +28,10 @@
 				<h5 class="card-title">Vos accompagnants</h5>
 				<table class="table">
 					<tr>
-						<th>e-mail</th>
-						<th>Nom</th> 
-						<th>Prénom</th>
-						<th>Supprimer</th>
+						<th>{{"email" | translate}}</th>
+						<th>{{"nom" | translate}}</th> 
+						<th>{{"prenom" | translate}}</th>
+						<th>{{"supprimer" | translate}}</th>
 					</tr>
 
 					<tr ng-repeat="(key, value) in tabAcc">
@@ -49,7 +49,7 @@
 		
 		<div class="card">
 			<div class="card-body">
-				<h5 class="card-title">Ajouter un accompagnant</h5>
+				<h5 class="card-title">{{"ajouterAcc" | translate}}</h5>
 				<div class="form-group">
 					<div class="container">
 						<div class="row justify-content-md-left">
@@ -91,7 +91,7 @@
 					<div class="container">
 						<div class="row justify-content-md-left">
 							<div class="col-sm-3">
-								<button ng-disabled="boutonAccState" class="btn btn-block" ng-click="inscriptionAccomp()">Inscrire l'accompagnant </button>
+								<button ng-disabled="boutonAccState" class="btn btn-block" ng-click="inscriptionAccomp()">{{"inscAcc" | translate}} </button>
 							</div>
 						</div>
 					</div>

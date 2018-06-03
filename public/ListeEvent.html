@@ -1,18 +1,19 @@
 <div class="container">
-	<h1 class="row justify-content-md-center">Liste des évènements</h1>
+	<h1 class="row justify-content-md-center">{{"lstEvent" | translate}}</h1>
 	</div>
 <div ng-controller="listeEventCtrl">
 	<div class="container" ng-controller="listeEventCtrl">
   	<table class="table table-bordered" id="listeEvent">
   		<thead>
   			<tr>
-  				<th>Acronyme</th>
-  				<th>Nom</th>
-  				<th>Lieu</th>
-  				<th>Ouverture inscription</th>
-  				<th>Fermeture inscription</th>
-          <th>Nombre de participant actuel</th>
-  				<th>Actions</th>
+  				<th>{{"acronyme" | translate}}</th>
+  				<th>{{"nom" | translate}}</th>
+  				<th>{{"lieu" | translate}}</th>
+  				<th>{{"dateDeb" | translate}}</th>
+  				<th>{{"dateFin" | translate}}</th>
+          <th>{{"nbPartActu" | translate}}</th>
+          <th>{{"modifier" | translate}}</th>
+  				<th>{{"supprimer" | translate}}</th>
   			</tr>
   		</thead>
   		<tbody>
@@ -24,10 +25,13 @@
   				<td>{{ x.datFerm }}</td>
           <td> {{x.listeParticipant.length}}/{{x.nbPartMax}} </td>
   				<td>
-  					<button class="btn" ng-click="modifier(x.id)" >Modifier</button>
-  					<button class="btn" ng-click="supprimer(x.id)">Supprimer</button>
+  					<button class="btn" ng-click="modifier(x.id)" >🖊️</button>
   				</td>
+          <td>
+            <button class="btn" ng-click="supprimer(x.id)">🗑️</button>
+          </td>
   			</tr>
+        
   		</tbody>
   	</table>
 	</div>
@@ -36,10 +40,10 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
         <div class="col-sm-3">
-            <button type="button" class="btn btn-block  btn-danger" ng-click="retour()">Annuler</button>
+            <button type="button" class="btn btn-block  btn-danger" ng-click="retour()">{{"annuler" | translate}}</button>
         </div>
 				<div class="col-sm-3">
-					<button class="btn btn-block" ng-click="modifier()">Ajouter un Evènement</button>
+					<button class="btn btn-block" ng-click="modifier()">{{"ajoutEvent" | translate}}</button>
 				</div>
 			</div>
 		</div>

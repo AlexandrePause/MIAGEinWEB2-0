@@ -1,0 +1,52 @@
+{
+	"listeDesEvenements" : "Liste des évènements",
+	"enToutlstEventPart1" : "Il y a en tout ",
+	"enToutlstEventPart2" : " évènements.",
+	"nomDeLevent" : "Nom de l'évènement",
+	"moyennePart" : "Moyenne de participant",
+	"part" : "participant(s).",
+	"typePartPossible" : "Types de participants possible : ",	
+	"partAlEvent" : "Participants à l'évènement",
+	"listeAccomp" : "Type d'inscription",
+	"typeInscription" : "Liste des accompagnants",
+	"votreInscrA" : "Votre inscription à ",
+	"descDeLevent" : "Description de l'événement",
+	"nbPart" : "Nombre de participants",
+	"lieuDeRenc" : "Lieu de rencontre",
+	"dateDeb" : "Date de début",
+	"dateFin" : "Date de fin",
+	"ajouterAcc" : "Ajouter un accompagnant",
+	"inscAcc" : "Inscrire l'accompagnant",
+	"ajoutEvent" : "Ajouter un Evènement",
+	"typePart" : "Type d'inscription",
+
+	"email" : "E-mail",
+	"nom" : "Nom",
+	"prenom" : "Prénom",
+	"tel" : "Téléphone",
+	"plusInfo" : "Plus d'infos",
+	"supprPart" : "Supprimer le participant",
+
+	"acronyme" : "Acronyme",
+	"lieu" : "Lieu",
+	"nbPartActu" : "Nombre de participants actuel",
+
+	"sinscrire" : "S'inscrire",
+	"annuler" : "Annuler",
+	"enregistrer" : "Enregistrer",
+	"retour" : "Retour",
+	"supprimer" : "Supprimer",
+	"modifier" : "Modifier",
+	"SeConnecter" : "Se connecter",
+
+	"creerType" : "Créer un type",
+	"ajoutEvent" : "Ajouter un évènement",
+	"accueil.titre" : "Gestionnaire d'évènements",
+	"administration" : "Administration",
+	"creerCompte" : "Créer un compte",
+	"lstEvent" : "Liste des évènements",
+	"sinscrireEvent" : "S'inscrire à un évènement",
+
+
+	"directives.language-select.Language" : "Langue"
+}

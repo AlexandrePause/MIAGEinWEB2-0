@@ -1,5 +1,5 @@
 <div class="container">
-	<h1 class="row justify-content-md-center">Ajouter un évènement</h1>
+	<h1 class="row justify-content-md-center">{{"ajoutEvent" | translate}}</h1>
 </div>
 
 
@@ -81,8 +81,8 @@
       <div class="container">
         <div class="row justify-content-md-center">  
              <div class="col-md-4">
-                 <label>Types de participants possible : </label>
-                             <button class="btn" ng-click="creerTypePart()">Créer un type</button>
+                 <label>{{"typePartPossible" | translate}}</label>
+                             <button class="btn" ng-click="creerTypePart()">{{"creerType" | translate}}</button>
                   </div>         
           </div>
         </div>
@@ -105,10 +105,10 @@
   		<div class="container">
   			<div class="row justify-content-md-center">
   				<div class="col-sm-3">
-  					<button type="button" class="btn btn-block btn-danger" ng-click="annuler()">Annuler</button>
+  					<button type="button" class="btn btn-block btn-danger" ng-click="annuler()">{{"annuler" | translate}}</button>
   				</div>
   				<div class="col-sm-3">
-  					<button type="button" class="btn btn-block" ng-click="enregistrer()">Enregistrer</button>
+  					<button type="button" class="btn btn-block" ng-click="enregistrer()">{{"enregistrer" | translate}}</button>
   				</div>
   			</div>
   		</div>
@@ -116,13 +116,13 @@
 	
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Participants à l'évènement</h5>
+      <h5 class="card-title">{{"partAlEvent" | translate}}</h5>
       <table class="table">
-        <th>e-mail</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Plus d'infos</th>
-        <th>Supprimer le participant</th>
+        <th>{{"email" | translate}}</th>
+        <th>{{"nom" | translate}}</th>
+        <th>{{"prenom" | translate}}</th>
+        <th>{{"plusInfo" | translate}}</th>
+        <th>{{"supprPart" | translate}}</th>
         <tr ng-repeat="(key, value) in listePart">
           <td>{{value.mail}}</td>
           <td>{{value.nom}}</td>

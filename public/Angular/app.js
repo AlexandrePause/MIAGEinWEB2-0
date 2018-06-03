@@ -1,4 +1,25 @@
-var app = angular.module("MIAGEin", ["ngRoute", "ngCookies", "ngSanitize"]);
+var app = angular.module("MIAGEin", ["ngRoute", "ngCookies", "ngSanitize", 'pascalprecht.translate', 'tmh.dynamicLocale'])
+app.constant('LOCALES', {
+    'locales': {
+        'fr_FR': 'Français',
+        'en_US': 'English'
+    },
+    'preferredLocale': 'fr_FR'
+});
+app.config(function (tmhDynamicLocaleProvider) {
+    tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
+});
+app.config(function ($translateProvider) {
+	$translateProvider.useMissingTranslationHandlerLog();
+});
+app.config(function ($translateProvider) {
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'locale-',// path to translations files
+        suffix: '.json'// suffix, currently- extension of the translations
+    });
+    $translateProvider.preferredLanguage('fr_FR');// is applied on first load
+    $translateProvider.useLocalStorage();// saves selected language to localStorage
+});
 
 app.config(function($routeProvider) {
   $routeProvider

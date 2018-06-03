@@ -3,16 +3,16 @@
 	<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">Information sur l'user</h5>
-			<p>E-mail : {{infoUser.mail}}</p>
-			<p>Nom : {{infoUser.nom}}</p>
-			<p>Prénom : {{infoUser.prenom}}</p>
-			<p>Téléphone : {{infoUser.tel}}</p>
-			<p>Type de participant : {{infoUser.idTypePartLib}}</p>
-			<h6>Liste de accompagnants : </h6>
+			<p>{{"email" | translate}} : {{infoUser.mail}}</p>
+			<p>{{"nom" | translate}} : {{infoUser.nom}}</p>
+			<p>{{"prenom" | translate}} : {{infoUser.prenom}}</p>
+			<p>{{"tel" | translate}} : {{infoUser.tel}}</p>
+			<p>{{"typeInscription" | translate}} : {{infoUser.idTypePartLib}}</p>
+			<h6>{{"listeAccomp" | translate}} : </h6>
 			<table class="table">
-				<th>E-mail</th>
-				<th>Nom</th>
-				<th>Prénom</th>
+				<th>{{"email" | translate}}</th>
+				<th>{{"nom" | translate}}</th>
+				<th>{{"prenom" | translate}}</th>
 				<tr ng-repeat="(key, value) in infoUser.listeAcc">
 					<td>{{value.mail}}</td>
 					<td>{{value.nom}}</td>
@@ -26,7 +26,7 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-sm-3">
-		          <button class="btn btn-block btn-warning" ng-click="retour()">Retour</button>
+		          <button class="btn btn-block btn-warning" ng-click="retour()">{{"retour" | translate}}</button>
 		        </div>
 			</div>
 		</div>

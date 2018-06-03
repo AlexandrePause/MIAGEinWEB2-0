@@ -6,7 +6,13 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-cookies.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-dynamic-locale/dist/tmhDynamicLocale.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-handler-log/angular-translate-handler-log.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
 	<script src="Angular/app.js"></script>
 	<script src="Angular/ajouterEventCtrl.js"></script>
@@ -18,8 +24,14 @@
 	<script src="Angular/accueilCtrl.js"></script>
 	<script src="Angular/inscriptionCtrl.js"></script>
 	<script src="Angular/infoUser.js"></script>
+	<script src="scripts/LocaleService.js"></script>
+	<script src="scripts/LanguageSelectDirective.js"></script>
+
 </head>
 <body ng-app="MIAGEin">
+
+	<div ng-translate-language-select></div>
+
 	<div ng-view>
 	</div>
 </body>
