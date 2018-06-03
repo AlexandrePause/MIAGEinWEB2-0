@@ -237,13 +237,12 @@ exports.getEvenementPossibleUser = function(id){
 	var user;
 	var tabEvent = [];
 	if(user = userData.recupUser(id)){
-		listeEvt.forEach(function(element){Z
+		listeEvt.forEach(function(element){
 			element.idTypePart.some(function(idTypePartEvent){
 				if(idTypePartEvent === user.idTypePart){
 					var dateNow = new Date();
 					var date = new Date(element.datFerm);
 					if(dateNow<date){
-						element.complet = complet;
 						tabEvent.push(element);
 						return true;
 					}	
