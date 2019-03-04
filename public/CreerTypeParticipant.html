@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="row justify-content-md-center">Créer un type de particpant</h1>
+</div>
+
+
+
+<form ng-controller="creerTypeCtrl">
+
+	<p ng-bind="error"></p>
+
+	<div class="form-group">
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-sm-7">
+					<input class="form-control" placeholder="Nom du type" type="text" ng-model="denom">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-sm-7">
+					<input class="form-control" placeholder="Nombre maximum d'accompagnant" type="number" ng-model="nbMax">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<button class="btn btn-block  btn-danger" onclick="window.location.href='#!modifEvent'">Annuler</button>
+				<div class="col-sm-3">
+					<button class="btn btn-block" ng-click="enregistrer()">Enregistrer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</form>

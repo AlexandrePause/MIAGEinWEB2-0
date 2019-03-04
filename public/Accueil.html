@@ -1,0 +1,104 @@
+<div ng-controller="accueilCtrl">
+<div class="topHautDroit">
+	<button  class="btn btn-block" ng-click="connexion()">{{ connexionStatus }}</button>
+</div>
+<div class="container">
+	<h1 class="row justify-content-md-center">Gestionnaire d'événements</h1>
+	<h2 class="row justify-content-md-center">{{ nomUser }}</h2>
+
+  <div class="form-group">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div ng-if="nomUser == 'Bonjour administrateur du service'" class="col-sm-3">
+          <button class="btn btn-block btn-danger" ng-click="administration()">Administration</button>
+        </div>
+        <div ng-if="nomUser != 'Bonjour administrateur du service'" class="col-sm-3">
+          <div ng-if="!nomUser || nomUser.length <2">
+            <button class="btn btn-block btn-success" ng-click="creerCompte()">S'inscrire</button>
+          </div>
+        </div>
+        
+        
+      </div>
+      <br>
+      <div ng-if="nomUser != 'Bonjour administrateur du service'" class="row justify-content-md-center">
+        <div class="col-md-6">
+          <a style="text-decoration: none" href="#!listeEventInscriptionUser"><button class="btn btn-block btn-info">Listes des évènements</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+		<div ng-if="nomUser == 'Bonjour administrateur du service'" class="row row justify-content">
+        <div class="row" >
+                <div class="card text-white bg-primary" style=" margin-left:3px;margin-top:2px;">
+                  <div class="card-body">
+                    <div class="card-body-icon">
+                      <i class="fa fa-fw fa-comments"></i>
+                    </div>
+                    <div class="mr-5">Il y a en tout {{ listeAllEvt[0].NbTotEvt }} évènements.</div>
+                  </div>
+                  <a class="card-footer text-white clearfix small z-1" style="height: 100%">
+                    <span class="float-left">
+                          <table class="table table-bordered" id="listeEvent">
+                            		<thead>
+                            			<tr>
+                            				<th>Nom de l'évènement</th>
+                            				<th>Moyenne de participant</th>
+                            			</tr>
+                            		</thead>
+                            		<tbody>
+                            			<tr ng-repeat="x in listeAllEvt[0].nbMoyPartEvt" ng-if="x.moyenne != 0  " >
+                              				<td>{{ x.nom }}</td>
+                              				<td>{{ x.moyenne | limitTo:3 }}</td>
+                            			</tr>
+                            		</tbody>
+        	               </table>
+                    </span>
+                    <span class="float-right">
+                      <i class="fa fa-angle-right"></i>
+                    </span>
+                  </a>
+                </div>
+
+                <!-- Evt one by one -->
+                        <div ng-repeat="x in listeAllEvt[0].nbMoyPartTypeEvt" ng-if=" x.nbPartiEvt != 0 && x.pourcent.length >0">
+                        <div class="card text-white bg-info" style=" margin-left:3px;margin-top:2px;">
+                          <div class="card-body">
+                            <div class="card-body-icon">
+                              <i class="fa fa-fw fa-comments">{{x.nom}} : {{x.nbPartiEvt}} participants.</i>
+                            </div>
+                            <div class="mr-5"></div>
+                          </div>
+                          <a class="card-footer text-white clearfix small z-1" style="height: 100%; min-height: 350px">
+                            <span class="float-left">
+                                  <table class="table table-bordered" id="listeEvent">
+                                        <thead>
+                                          <tr>
+                                            <th>Type</th>
+                                            <th>%</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr ng-repeat="y in x.pourcent track by $index">
+                                                 <td>{{ y.type.denom }}</td>
+                                                 <td>{{ y.pourcentage | limitTo:4 }}</td>
+                                          </tr>
+                                        </tbody>
+                                 </table>
+                            </span>
+                            <span class="float-right">
+                              <i class="fa fa-angle-right"></i>
+                            </span>
+                          </a>
+                        </div>
+                      </div>
+              </div>
+
+
+              
+    </div>
+
+</div>
+<br>
+
+</div>

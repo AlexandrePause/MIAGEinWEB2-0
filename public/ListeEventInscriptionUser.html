@@ -1,0 +1,38 @@
+<div class="container">
+	<h1 class="row justify-content-md-center">S'inscrire à un évènement</h1>
+</div>
+<div ng-controller="listeEventInscriptionUserCtrl">
+	<div class="container">
+  	<table class="table table-bordered" id="listeEvent">
+  		<thead>
+  			<tr>
+  				<th>Acronyme</th>
+  				<th>Nom</th>
+  				<th>Lieu</th>
+  				<th>Ouverture inscription</th>
+  				<th>Fermeture inscription</th>
+          <th>Nombre de places</th>
+  				<th>Actions</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<tr ng-repeat="x in listeEvent" id="{{x.id}}">
+  				<td>{{ x.acro }}</td>
+  				<td>{{ x.nom }}</td>
+  				<td>{{ x.lieu }}</td>
+  				<td>{{ x.datOuvr }}</td>
+  				<td>{{ x.datFerm }}</td>
+          <td>{{x.listeParticipant.length}}/{{x.nbPartMax}}</td>
+  				<td>
+            <button ng-if="x.nbPart < x.nbPartMax || !x.nbPart" class="btn" ng-click="inscrire(x.id)" >Voir</button>
+           <b> <text ng-if="x.nbPartMax == x.nbPart">Complet</text></b>
+           <i> <text ng-repeat="y in x.listeParticipant" ng-if="y == tokenToTest"><br>Vous êtes inscrit</text></i>
+  				</td>
+  			</tr>
+  		</tbody>
+  	</table>
+    <div class="col-sm-3">
+            <button type="button" class="btn btn-block  btn-warning" ng-click="retour()">Retour</button>
+    </div>
+	</div>
+</div>

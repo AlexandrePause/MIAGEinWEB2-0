@@ -1,0 +1,6 @@
+.topHautDroit{
+        float: right;
+        vertical-align: top;
+        display: block;
+        position: relative;
+}

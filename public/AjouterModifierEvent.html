@@ -1,0 +1,117 @@
+<div class="container">
+	<h1 class="row justify-content-md-center">Ajouter un évènement</h1>
+</div>
+
+
+
+<form ng-controller="ajouterEventCtrl">
+
+    <p ng-bind="error"></p>
+
+		<div class="form-group">
+  		<div class="container">
+  			<div class="row justify-content-md-center">
+  				<div class="col-sm-7">
+  					<input class="form-control"  placeholder="Acronyme" type="text" ng-model="acro" required>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+
+  	<div class="form-group">
+  		<div class="container">
+  			<div class="row justify-content-md-center">
+  				<div class="col-sm-7">
+  					<input class="form-control" placeholder="Nom" type="text" ng-model="nom" required>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+
+  	<div class="form-group">
+  		<div class="container">
+  			<div class="row justify-content-md-center">
+  				<div class="col-sm-7">
+  					<input class="form-control" placeholder="Description" type="text" ng-model="desc">
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+
+  	<div class="form-group">
+  		<div class="container">
+  			<div class="row justify-content-md-center">
+  				<div class="col-sm-7">
+  					<input class="form-control" placeholder="Date d'ouverture des inscriptions" type="text" ng-model="dateOuv">
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+
+  	<div class="form-group">
+  		<div class="container">
+  			<div class="row justify-content-md-center">
+  				<div class="col-sm-7">
+  					<input class="form-control" placeholder="Date de fermeture des des inscriptions" type="text" ng-model="dateFerm">
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+
+  	<div class="form-group">
+  		<div class="container">
+  			<div class="row justify-content-md-center">
+  				<div class="col-sm-7">
+  					<input class="form-control" placeholder="Lieu" type="text" ng-model="lieu">
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+
+  	<div class="form-group">
+  		<div class="container">
+  			<div class="row justify-content-md-center">
+  				<div class="col-sm-7">
+  					<input class="form-control" placeholder="Nombre de participants maximal" type="number" ng-model="nbPartMax">
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  <div class="form-group">
+      <div class="container">
+        <div class="row justify-content-md-center">  
+             <div class="col-md-4">
+                 <label>Types de participants possible : </label>
+                             <button class="btn" ng-click="creerTypePart()">Créer un type</button>
+                  </div>         
+          </div>
+        </div>
+      </div>
+  <div class="form-group">
+      <div class="container">
+        <div class="row justify-content-md-center">  
+          <div ng-repeat="x in listeType">
+             <div class="col-md-12">
+                  <input type="checkbox" ng-model="idTypePart[x.id]">
+                 <label>{{x.denom}}</label>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  	<div class="form-group">
+  		<div class="container">
+  			<div class="row justify-content-md-center">
+  				<div class="col-sm-3">
+  					<button type="button" class="btn btn-block btn-danger" ng-click="annuler()">Annuler</button>
+  				</div>
+  				<div class="col-sm-3">
+  					<button type="button" class="btn btn-block" ng-click="enregistrer()">Enregistrer</button>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+	
+</form>
